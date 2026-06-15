@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Multi-Agent Board Simulation — assignment brief</title><style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 20px;line-height:1.6;color:#1d1a14;background:#f8f3e8}h1,h2,h3{font-family:Georgia,serif;line-height:1.2}table{border-collapse:collapse;margin:14px 0}th,td{border:1px solid #d6cdb8;padding:8px 12px;text-align:left;vertical-align:top}pre{background:#efe9da;border:1px solid #d6cdb8;padding:14px;overflow-x:auto;white-space:pre-wrap}code{background:#efe9da;padding:1px 5px}.src{font-size:12px;color:#6b6452;border-top:1px solid #d6cdb8;margin-top:40px;padding-top:12px}</style></head><body><h1>Multi-Agent Board Simulation — assignment brief</h1><p>&nbsp;</p>
+<h2>Week 5 – Corporate Strategy, Ethics &amp; Governance</h2>
+<h3>Multi-Agent Board Simulation + Board Brief</h3>
+<p><strong>Upload one ZIP by Sunday 11:59 PM</strong></p>
+<hr>
+<h3>0 Pick ONE case (read before you start)</h3>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Central decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GE: Breaking Up a Century-Old Conglomerate</strong></td>
+<td>Should the board finish splitting GE into three stand-alone firms?</td>
+</tr>
+<tr>
+<td><strong>José Cuervo: Family Control &amp; Global Ambition</strong></td>
+<td>How much equity/control should the Beckmann family keep as they globalize?</td>
+</tr>
+<tr>
+<td><strong>Tesla in 2022</strong></td>
+<td>Does adding Energy + AI keep or dilute Tesla’s competitive advantage—and how should the board oversee a dominant founder?</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>PHASE 1 — Project &amp; System Prompt (≈10 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Exact clicks &amp; text</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Create project</td>
+<td>Sidebar ➜ <strong>Projects</strong> ➜ <strong>New Project</strong> → name <code>BUSMGT450_W5_[Company]</code></td>
+<td>Keeps everything in one sandbox.</td>
+</tr>
+<tr>
+<td>2. Upload files</td>
+<td>Drag in the case file <strong>+ 5 outside sources</strong> (at least 2 on governance/ethics).</td>
+<td>Gives GPT a mini-library to cite.</td>
+</tr>
+<tr>
+<td>3. Add system prompt</td>
+<td>Project header ➜ <strong>Settings</strong> ➜ <em>System Prompt</em> field → paste &amp; edit the sample below.</td>
+<td>Sets permanent rules for every chat.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sample system prompt (edit bracketed parts)</strong></p>
+<pre><code>Roles: CEO, CFO, General Counsel, Independent Director, Board Ethicist.
+Each role will speak once (≤150 words) and tag stance at top: [YES] [NO] [MAYBE].
+Style: concise boardroom English, APA in-text citations to knowledge-base docs only.
+Frameworks to reference when relevant: Better-Off Test, Ownership Test, Parenting Advantage, stakeholder theory, agency theory.
+Finish by waiting for the user's next instruction.
+</code></pre>
+<hr>
+<h2>PHASE 2 — Collect Agent Opinions (≈20 min)</h2>
+<ol>
+<li>
+<p><strong>Stay inside the same Project chat</strong> (GPT-4o is fine).</p>
+</li>
+<li>
+<p>For each role, paste the template below, editing the bracketed text:</p>
+</li>
+</ol>
+<pre><code class="language-text">##agent role=CEO
+Prompt: Given the uploaded files, should the board approve [the GE break-up into three companies] today? Provide one strategic reason, one risk, stance tag, ≤150 words.
+
+##agent role=CFO
+Prompt: Same question. Base answer on financial &amp; valuation data.
+
+##agent role=General Counsel
+Prompt: Identify any regulatory or fiduciary concerns.
+
+##agent role=Independent Director
+Prompt: Evaluate from minority shareholder &amp; reputation angle.
+
+##agent role=Board Ethicist
+Prompt: Assess broader stakeholder impacts &amp; ESG obligations.
+</code></pre>
+<ol start="3">
+<li>
+<p><strong>After all five replies</strong> paste:</p>
+</li>
+</ol>
+<pre><code class="language-text">Switch to o3 (Reasoner), then:  
+"Act as neutral board secretary. Summarise where the five roles agree / partly agree / disagree. List any data still needed."
+</code></pre>
+<p>Copy these outputs into a text file—you’ll need them for the log.</p>
+<hr>
+<h2>PHASE 3 — Create the Consensus Matrix (≈5 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Quick method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In ChatGPT: “Create a 5×3 table: rows = CEO, CFO, GC, ID, Ethicist; columns = YES, NO, MAYBE. Mark each cell with ✓ based on stance tags above.”</td>
+</tr>
+<tr>
+<td>Copy the table into PowerPoint/Word → save as <strong>ConsensusMatrix.png</strong> (right-click → <em>Save as Picture</em>).</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>PHASE 4 — Write the Board Brief (≈60 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Guideline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Issue &amp; Context</strong> (≤150 w)</td>
+<td>What strategic scope choice is on the table?</td>
+</tr>
+<tr>
+<td><strong>B. Agent Positions</strong> (≈250 w)</td>
+<td>Summarise each role’s key point using APA citations &amp; AgentLog references.</td>
+</tr>
+<tr>
+<td><strong>C. Analysis</strong> (≈400 w)</td>
+<td>Apply ≥ 2 frameworks (e.g., Better-Off Test + shareholder supremacy + stakeholder theory). Show why some arguments carry more weight.</td>
+</tr>
+<tr>
+<td><strong>D. Recommendation</strong> (≈150 w)</td>
+<td>One clear decision + at least two risk-mitigation steps.</td>
+</tr>
+<tr>
+<td><strong>E. AI Reflection</strong> (≤150 w)</td>
+<td>1–2 things multi-agent GPT added; 1–2 limits you still handled manually.</td>
+</tr>
+</tbody>
+</table>
+<p>Embed <strong>ConsensusMatrix.png</strong> where it best supports the story.<br>Total length goal: <strong>1 000–1 300 words</strong>.</p>
+<hr>
+<h2>PHASE 5 — Package &amp; Submit</h2>
+<table>
+<thead>
+<tr>
+<th>Put in ZIP</th>
+<th>Filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All outside docs</td>
+<td><code>/sources/…</code></td>
+</tr>
+<tr>
+<td>System prompt text</td>
+<td><code>SystemPrompt.txt</code></td>
+</tr>
+<tr>
+<td>Copy–pasted role replies + secretary minutes</td>
+<td><code>AgentLog.txt</code></td>
+</tr>
+<tr>
+<td>The matrix image</td>
+<td><code>ConsensusMatrix.png</code></td>
+</tr>
+<tr>
+<td>Your polished brief</td>
+<td><code>BoardBrief.docx</code></td>
+</tr>
+</tbody>
+</table>
+<p>Upload <code>LastName_W5_BoardSim.zip</code> to Canvas.</p>
+<hr>
+<h2>Grading Checklist (25 pts)</h2>
+<ol>
+<li>
+<p><strong>System Prompt &amp; Set-up</strong> 5 pts</p>
+</li>
+<li>
+<p><strong>Agent Quality &amp; Secretary Summary</strong> 5 pts</p>
+</li>
+<li>
+<p><strong>Consensus Matrix Visual</strong> 3 pts</p>
+</li>
+<li>
+<p><strong>Framework Depth &amp; Correctness</strong> 6 pts</p>
+</li>
+<li>
+<p><strong>Recommendation &amp; Writing Quality</strong> 4 pts</p>
+</li>
+<li>
+<p><strong>AI Reflection</strong> 2 pts</p>
+</li>
+</ol>
+<p><em>(Rubric details on Canvas &gt; Assignments.)</em></p>
+<hr>
+<h3>Quick FAQ</h3>
+<ul>
+<li>
+<p><strong>Where do I type <code>##agent role=</code>?</strong><br>Just paste it at the start of each new message in the same Project chat.</p>
+</li>
+<li>
+<p><strong>Word limit strict?</strong><br>±10 % is fine; clarity beats length.</p>
+</li>
+<li>
+<p><strong>Can I add extra roles?</strong><br>Yes, but keep each to ≤150 words.</p>
+</li>
+<li>
+<p><strong>Trouble exporting the matrix?</strong><br>A plain screenshot (PNG) is acceptable.</p>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p class="src">From The Toolbox &middot; Steven J. Hyde &middot; Boise State &middot; BUS 450. Take what is useful.</p></body></html>

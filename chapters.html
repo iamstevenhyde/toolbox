@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Toolbox — Chapters</title>
+<meta name="description" content="The textbook, rebuilt: each week of MBA 546 and the AI Literacy Academy as a NotebookLM of foundational sources students synthesize into their own chapter.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Toolbox — Chapters">
+<meta property="og:description" content="The textbook, rebuilt: each week as a NotebookLM of foundational sources.">
+<meta property="og:image" content="https://iamstevenhyde.github.io/toolbox/assets/img/toolbox-logo-lockup.png">
+<meta property="og:url" content="https://iamstevenhyde.github.io/toolbox/chapters.html">
+<link rel="canonical" href="https://iamstevenhyde.github.io/toolbox/chapters.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+</head>
+<body class="wall">
+<div class="topstrip"></div>
+<header class="site"><div class="sheet">
+  <div class="topbar">
+    <a class="brand" href="./index.html"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><mask id="tbm"><path d="M36,26 A14,14 0 0 1 64,26 Z" fill="#fff"/><circle cx="50" cy="26" r="7" fill="#000"/><rect x="12" y="26" width="76" height="62" rx="9" fill="#fff"/><rect x="12" y="46" width="76" height="3.5" fill="#000"/><rect x="12" y="67" width="76" height="3.5" fill="#000"/><circle cx="50" cy="56.5" r="4.2" fill="#000"/><circle cx="50" cy="77.5" r="4.2" fill="#000"/></mask><g id="tbmark"><rect width="100" height="100" mask="url(#tbm)" fill="currentColor"/></g></svg><span class="wm">The Toolbox</span></a>
+    <nav class="nav">
+      <a href="./index.html">The Bench</a>
+      <a href="./chapters.html" class="on">Chapters</a>
+      <a href="./cases.html">Cases</a>
+      <a href="./about.html">About</a>
+      <a href="./submit.html">Submit</a>
+    </nav>
+    <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
+    <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
+  </div>
+</div></header>
+
+<section class="lead-band"><div class="sheet">
+  <div class="kicker">The ledger</div>
+  <h1>The textbook, <i>rebuilt.</i></h1>
+  <p>No textbook. Each week is a NotebookLM of the foundational sources, and students synthesize it into their own chapter.</p>
+</div></section>
+
+<div class="paperzone"><main class="sheet" id="courses" style="padding-bottom:70px"></main></div>
+
+<footer class="site"><div class="sheet"><div class="row">
+  <span><svg class="mark sm" viewBox="0 0 100 100" aria-hidden="true"><use href="#tbmark"/></svg>Steven J. Hyde · Associate Professor of Management · Boise State</span>
+  
+  <span>Grounded in reality</span>
+</div></div></footer>
+
+<script src="assets/data.js"></script>
+<script>
+function nlm(it, courseCreated){
+  const built = it.created !== undefined ? it.created : courseCreated;
+  if(it.nm==="Student Work Day") return `<span class="nlm tbd">no notebook</span>`;
+  if(it.nlm) return `<a class="nlm" href="${it.nlm}" target="_blank" rel="noopener">open the notebook ↗</a>`;
+  return built
+    ? `<span class="nlm tbd" title="notebook built; public share link pending">built · link pending</span>`
+    : `<span class="nlm tbd">NotebookLM · TBD</span>`;
+}
+function course(c){
+  return `<section class="course">
+    <div class="course-head"><h2>${c.course}</h2><span class="meta">${c.items.length} chapters</span></div>
+    <p class="note">${c.note}</p>
+    ${c.items.map(it=>`<div class="chapter">
+      <div class="no">${String(it.no).padStart(2,'0')}</div>
+      <div class="nm">${it.nm}</div>
+      <div class="src">${it.src||''}</div>
+      <div class="lab">${nlm(it, c.created)}</div>
+    </div>`).join("")}
+  </section>`;
+}
+const ch = window.HT.chapters;
+document.getElementById("courses").innerHTML = course(ch.aiLit) + course(ch.mba546);
+</script>
+<script src="./assets/cmdk.js"></script>
+</body>
+</html>

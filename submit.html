@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Toolbox — Submit</title>
+<meta name="description" content="Submit an AI classroom tool to the Toolbox. Tools that hold up in a real classroom get a card on the bench, with credit.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Toolbox — Submit">
+<meta property="og:description" content="Submit an AI classroom tool. The ones that hold up get a card on the bench, with credit.">
+<meta property="og:image" content="https://iamstevenhyde.github.io/toolbox/assets/img/toolbox-logo-lockup.png">
+<meta property="og:url" content="https://iamstevenhyde.github.io/toolbox/submit.html">
+<link rel="canonical" href="https://iamstevenhyde.github.io/toolbox/submit.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+</head>
+<body class="wall">
+<div class="topstrip"></div>
+<header class="site"><div class="sheet">
+  <div class="topbar">
+    <a class="brand" href="./index.html"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><mask id="tbm"><path d="M36,26 A14,14 0 0 1 64,26 Z" fill="#fff"/><circle cx="50" cy="26" r="7" fill="#000"/><rect x="12" y="26" width="76" height="62" rx="9" fill="#fff"/><rect x="12" y="46" width="76" height="3.5" fill="#000"/><rect x="12" y="67" width="76" height="3.5" fill="#000"/><circle cx="50" cy="56.5" r="4.2" fill="#000"/><circle cx="50" cy="77.5" r="4.2" fill="#000"/></mask><g id="tbmark"><rect width="100" height="100" mask="url(#tbm)" fill="currentColor"/></g></svg><span class="wm">The Toolbox</span></a>
+    <nav class="nav">
+      <a href="./index.html">The Bench</a>
+      <a href="./chapters.html">Chapters</a>
+      <a href="./cases.html">Cases</a>
+      <a href="./about.html">About</a>
+      <a href="./submit.html" class="on">Submit</a>
+    </nav>
+    <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
+    <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
+  </div>
+</div></header>
+
+<section class="lead-band"><div class="sheet">
+  <div class="kicker">The inbox</div>
+  <h1>Put one on <i>the bench.</i></h1>
+  <p>Built something that holds up in a real classroom? Send it in. Every submission gets read, and the ones that earn it get a card on the bench, with credit to you.</p>
+</div></section>
+
+<div class="paperzone"><main class="sheet" style="padding:46px 0 84px">
+  <div id="sentnote" class="formfallback" style="display:none">
+    <div class="dsub">received</div>
+    <p>Got it. Every submission gets read. If yours makes the bench you will hear back, and the card will carry your name.</p>
+    <a class="btn primary" href="./index.html">back to the bench</a>
+  </div>
+  <form id="tform" class="tform" action="https://formsubmit.co/iamstevenhyde@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Toolbox submission">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://iamstevenhyde.github.io/toolbox/submit.html?sent=1">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="trow two">
+      <label>Your name<input type="text" name="name" required placeholder="So the card can carry it"></label>
+      <label>Email<input type="email" name="email" required placeholder="Where to reach you"></label>
+    </div>
+    <div class="trow two">
+      <label>Tool name<input type="text" name="tool_name" required placeholder="What you call it"></label>
+      <label>Platform
+        <select name="platform" required>
+          <option value="" disabled selected>Where it runs</option>
+          <option>ChatGPT</option><option>Poe</option><option>HTML file</option>
+          <option>Plain prompt</option><option>Web app</option><option>Other</option>
+        </select>
+      </label>
+    </div>
+    <div class="trow">
+      <label>What it does<textarea name="what_it_does" rows="3" required placeholder="Two or three sentences. What do students actually do, and what do they walk away with?"></textarea></label>
+    </div>
+    <div class="trow">
+      <label>Link<input type="url" name="link" placeholder="Bot, file, or repo. Optional but it helps."></label>
+    </div>
+    <div class="trow">
+      <label>How you run it in class<textarea name="how_you_run_it" rows="3" placeholder="Time it takes, level, prep, anything a stranger would need to run it cold."></textarea></label>
+    </div>
+    <label class="tcheck"><input type="checkbox" name="ok_to_publish" value="yes" required> If it makes the bench, you may publish it with credit to me.</label>
+    <div class="trow">
+      <button class="btn primary" type="submit">send it in</button>
+      <span class="finehint">Or skip the form and <a href="mailto:iamstevenhyde@gmail.com?subject=Toolbox%20submission">email it</a>.</span>
+    </div>
+  </form>
+</main></div>
+
+<footer class="site"><div class="sheet"><div class="row">
+  <span><svg class="mark sm" viewBox="0 0 100 100" aria-hidden="true"><use href="#tbmark"/></svg>Steven J. Hyde · Associate Professor of Management · Boise State</span>
+  
+  <span>Grounded in reality</span>
+</div></div></footer>
+
+<script src="assets/data.js"></script>
+<script>
+// FormSubmit relay: first real submission triggers a one-time activation email
+// to iamstevenhyde@gmail.com; click it once and every submission after lands in the inbox.
+if (new URLSearchParams(location.search).get("sent") === "1") {
+  document.getElementById("tform").style.display = "none";
+  document.getElementById("sentnote").style.display = "block";
+}
+</script>
+<script src="./assets/cmdk.js"></script>
+</body>
+</html>

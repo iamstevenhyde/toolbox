@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Corp Consulting Competition | BUS 450</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #0a0a0f;
+    color: #e8e8ed;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 60px 80px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .slide.active { display: flex; }
+
+  .slide-counter {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 300;
+    z-index: 100;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #b0b0b8;
+  }
+
+  p, li {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    font-weight: 300;
+    color: #c0c0c8;
+  }
+
+  .subtitle {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 8px 0; padding-left: 24px; position: relative; }
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4a6cf7;
+  }
+
+  .accent { color: #4a6cf7; }
+  .warn { color: #f7854a; }
+  .green { color: #4af785; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .firm-card {
+    background: #14141f;
+    border: 1px solid #2a2a3a;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 16px;
+  }
+
+  .firm-card h3 {
+    color: #e8e8ed;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+  }
+
+  .firm-card p {
+    font-size: 1.1rem;
+    color: #888;
+  }
+
+  .firm-card.pitch { border-left: 4px solid #4a6cf7; }
+  .firm-card.stake { border-left: 4px solid #f7854a; }
+
+  /* Face card grid */
+  .card-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 24px;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .card-grid .card-label {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e8e8ed;
+    padding: 8px 0;
+  }
+
+  .card-grid .card-label.king { color: #4a6cf7; }
+  .card-grid .card-label.queen { color: #f7854a; }
+  .card-grid .card-label.jack { color: #4af785; }
+
+  .card-grid .card-role {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #c0c0c8;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a2a;
+  }
+
+  .card-grid .card-role span {
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 300;
+  }
+
+  .card-section-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 16px 0 4px 0;
+    grid-column: 1 / -1;
+  }
+
+  .timeline {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 30px 0;
+  }
+
+  .timeline-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    padding: 0 6px;
+    line-height: 1.2;
+  }
+
+  .timer-display {
+    font-size: 8rem;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -4px;
+    text-align: center;
+    margin: 30px 0;
+    transition: color 0.3s;
+  }
+
+  .timer-display.running { color: #4af785; }
+  .timer-display.warning { color: #f7d54a; }
+  .timer-display.expired { color: #f74a4a; animation: pulse 1s ease-in-out infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .timer-hint {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 10px;
+  }
+
+  .deliv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .deliv-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #1a1a2a;
+  }
+
+  .deliv-item .role {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #e8e8ed;
+    min-width: 200px;
+  }
+
+  .deliv-item .what {
+    font-size: 1rem;
+    color: #888;
+  }
+
+  .vote-options {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .vote-card {
+    flex: 1;
+    background: #14141f;
+    border: 2px solid #2a2a3a;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .vote-card h3 { color: #e8e8ed; font-size: 1.6rem; }
+  .vote-card p { font-size: 1rem; }
+
+  .floor-prompt {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: #e8e8ed;
+    margin: 40px 0;
+  }
+
+  .floor-sub {
+    font-size: 1.3rem;
+    text-align: center;
+    color: #888;
+  }
+
+  /* Q&A slide */
+  .qa-block {
+    margin: 20px 0;
+  }
+
+  .qa-block h3 {
+    font-size: 1.4rem;
+    color: #e8e8ed;
+    margin-bottom: 12px;
+  }
+
+  .qa-step {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a2a;
+  }
+
+  .qa-step .step-num {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #4a6cf7;
+    min-width: 30px;
+  }
+
+  .qa-step .step-text {
+    font-size: 1.2rem;
+    color: #c0c0c8;
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide" id="s1">
+  <div class="subtitle">BUS 450 &mdash; Business Policies &mdash; April 2, 2026</div>
+  <h1>AI Corp<br><span class="accent">Consulting Competition</span></h1>
+  <p style="margin-top: 30px; font-size: 1.2rem; color: #555;">Press <strong>SPACE</strong> or <strong>&rarr;</strong> to advance</p>
+</div>
+
+<!-- SLIDE 2: The Situation -->
+<div class="slide" id="s2">
+  <h2>The Situation</h2>
+  <ul>
+    <li>Apparel Innovation Brands (AI Corp). 12 brands. New CEO.</li>
+    <li>Target: <span class="accent">$300 million</span> in cost reductions.</li>
+    <li>You have interviewed the executives. You have seen the numbers.</li>
+    <li style="color: #e8e8ed; font-weight: 600;">Today you present.</li>
+  </ul>
+</div>
+
+<!-- SLIDE 3: How Today Works -->
+<div class="slide" id="s3">
+  <h2>How Today Works</h2>
+  <ul>
+    <li><span class="accent" style="font-weight:600;">3 teams</span> pitch their strategy to the CEO (3 min each)</li>
+    <li><span class="warn" style="font-weight:600;">7 teams</span> play stakeholder roles</li>
+    <li>After each pitch: CEO question, then I call on stakeholders to respond</li>
+    <li>Every team has a deliverable. Nobody is just watching.</li>
+  </ul>
+</div>
+
+<!-- SLIDE 4: Draw Your Card -->
+<div class="slide" id="s4">
+  <h2>Draw Your Card</h2>
+  <div class="two-col" style="gap: 40px;">
+    <div>
+      <div class="card-grid">
+        <div class="card-section-label">Pitching Firms (Kings)</div>
+        <div class="card-label king">K&spades;</div>
+        <div class="card-role">Apex Strategy Group <span>Full turnaround</span></div>
+        <div class="card-label king">K&hearts;</div>
+        <div class="card-role">Ridgeline Capital Advisors <span>Financial restructuring</span></div>
+        <div class="card-label king">K&clubs;</div>
+        <div class="card-role">Ironbridge Supply Chain <span>Operations rebuttal</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-grid">
+        <div class="card-section-label">Stakeholders (Queens &amp; Jacks)</div>
+        <div class="card-label queen">Q&spades;</div>
+        <div class="card-role">Thornfield Equity Partners <span>Activist hedge fund</span></div>
+        <div class="card-label queen">Q&hearts;</div>
+        <div class="card-role">Allied Workforce Coalition <span>Labor</span></div>
+        <div class="card-label queen">Q&clubs;</div>
+        <div class="card-role">Meridian Credit Advisory <span>Credit rating</span></div>
+        <div class="card-label queen">Q&diams;</div>
+        <div class="card-role">GreenMark Sustainability <span>ESG watchdog</span></div>
+        <div class="card-label jack">J&diams;</div>
+        <div class="card-role">Blackthorn M&amp;A Partners <span>M&amp;A advisory</span></div>
+        <div class="card-label jack">J&hearts;</div>
+        <div class="card-role">Larkwell &amp; Associates <span>Industry analysts</span></div>
+        <div class="card-label jack">J&clubs;</div>
+        <div class="card-role">Slate Business Journal <span>Press</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: The Format -->
+<div class="slide" id="s5">
+  <h2>The Format</h2>
+  <p style="font-size: 1.5rem; color: #e8e8ed; font-weight: 600; margin-bottom: 30px;">Each pitch round:</p>
+  <div class="qa-block">
+    <div class="qa-step">
+      <div class="step-num">1</div>
+      <div class="step-text">Team pitches their strategy to CEO Buckwalter <span class="accent">(3 minutes)</span></div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">2</div>
+      <div class="step-text">The CEO asks questions</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">3</div>
+      <div class="step-text">I call on stakeholder teams to respond from their lens</div>
+    </div>
+  </div>
+  <p style="margin-top: 30px; color: #888; font-size: 1.1rem;">Then we repeat for the next firm. Three rounds, then open floor.</p>
+</div>
+
+<!-- SLIDE 6: Timeline -->
+<div class="slide" id="s6">
+  <h2>Timeline</h2>
+  <div class="timeline">
+    <div class="timeline-seg" style="flex:10; background:#2a4a8f;">Prep<br>10 min</div>
+    <div class="timeline-seg" style="flex:10; background:#4a6cf7;">Apex<br>10 min</div>
+    <div class="timeline-seg" style="flex:2; background:#333; font-size:0.65rem;">—</div>
+    <div class="timeline-seg" style="flex:10; background:#3b5bd6;">Ridgeline<br>10 min</div>
+    <div class="timeline-seg" style="flex:2; background:#333; font-size:0.65rem;">—</div>
+    <div class="timeline-seg" style="flex:10; background:#2d4abf;">Ironbridge<br>10 min</div>
+    <div class="timeline-seg" style="flex:4; background:#f7854a;">Slate<br>3 min</div>
+    <div class="timeline-seg" style="flex:8; background:#c74040;">Declarations<br>8 min</div>
+    <div class="timeline-seg" style="flex:8; background:#7a3bf7;">Debrief<br>8 min</div>
+    <div class="timeline-seg" style="flex:5; background:#555;">Vote<br>5 min</div>
+  </div>
+  <p style="margin-top: 20px; color: #888; font-size: 1rem;">
+    Each pitch = 5 min pitch + 2 min CEO + 3 min stakeholders. 2-min break between rounds.
+  </p>
+  <p style="color: #555; font-size: 1rem;">~75 minutes total</p>
+</div>
+
+<!-- SLIDE 7: Prep Time -->
+<div class="slide" id="s7">
+  <h2>Prep Time</h2>
+  <div class="two-col">
+    <div>
+      <h3 class="accent">Pitching Teams (Kings)</h3>
+      <ul>
+        <li>Organize your 3-minute presentation</li>
+        <li>Decide who covers what</li>
+        <li>Tighten your $300M bridge</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="warn">Stakeholder Teams</h3>
+      <ul>
+        <li>Read your role card</li>
+        <li>Review your notes and financials</li>
+        <li>Prepare your questions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timer-display" id="timer-prep" data-seconds="600">10:00</div>
+  <div class="timer-hint">Click the timer or press <strong>T</strong> to start</div>
+</div>
+
+<!-- SLIDE 8: Apex Pitch -->
+<div class="slide" id="s8">
+  <div class="subtitle">Pitch 1 of 3 &mdash; K&spades;</div>
+  <h1>Apex Strategy Group</h1>
+  <h3>"We build strategies that hold up under fire."</h3>
+  <div class="timer-display" id="timer-apex" data-seconds="180">3:00</div>
+  <div class="timer-hint">Click the timer or press <strong>T</strong> to start</div>
+</div>
+
+<!-- SLIDE 9: Q&A (Apex) -->
+<div class="slide" id="s9">
+  <h2>Apex Strategy Group &mdash; Q&amp;A</h2>
+  <div class="qa-block">
+    <div class="qa-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><span class="warn">CEO Buckwalter</span> asks questions</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><span class="accent">Q&spades;</span> <strong>Thornfield Equity Partners</strong> responds</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><span class="accent">Q&hearts;</span> <strong>Allied Workforce Coalition</strong> responds</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">4</div>
+      <div class="step-text">Apex may respond briefly</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Ridgeline Pitch -->
+<div class="slide" id="s10">
+  <div class="subtitle">Pitch 2 of 3 &mdash; K&hearts;</div>
+  <h1>Ridgeline Capital Advisors</h1>
+  <h3>"We come in when it gets serious."</h3>
+  <div class="timer-display" id="timer-ridge" data-seconds="180">3:00</div>
+  <div class="timer-hint">Click the timer or press <strong>T</strong> to start</div>
+</div>
+
+<!-- SLIDE 11: Q&A (Ridgeline) -->
+<div class="slide" id="s11">
+  <h2>Ridgeline Capital &mdash; Q&amp;A</h2>
+  <div class="qa-block">
+    <div class="qa-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><span class="warn">CEO Buckwalter</span> asks questions</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><span class="accent">Q&clubs;</span> <strong>Meridian Credit Advisory</strong> responds</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><span class="accent">J&diams;</span> <strong>Blackthorn M&amp;A Partners</strong> responds</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">4</div>
+      <div class="step-text">Ridgeline may respond briefly</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Ironbridge Pitch -->
+<div class="slide" id="s12">
+  <div class="subtitle">Pitch 3 of 3 &mdash; K&clubs;</div>
+  <h1>Ironbridge Supply Chain</h1>
+  <h3>"You have heard two strategies. Tell us what they missed."</h3>
+  <div class="timer-display" id="timer-iron" data-seconds="180">3:00</div>
+  <div class="timer-hint">Click the timer or press <strong>T</strong> to start</div>
+</div>
+
+<!-- SLIDE 13: Q&A (Ironbridge) -->
+<div class="slide" id="s13">
+  <h2>Ironbridge Supply Chain &mdash; Q&amp;A</h2>
+  <div class="qa-block">
+    <div class="qa-step">
+      <div class="step-num">1</div>
+      <div class="step-text"><span class="warn">CEO Buckwalter</span> asks questions</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">2</div>
+      <div class="step-text"><span class="accent">J&hearts;</span> <strong>Larkwell &amp; Associates</strong> responds</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">3</div>
+      <div class="step-text"><span class="accent">Q&diams;</span> <strong>GreenMark Sustainability</strong> responds</div>
+    </div>
+    <div class="qa-step">
+      <div class="step-num">4</div>
+      <div class="step-text">Ironbridge may respond briefly</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 14: Press Headlines -->
+<div class="slide" id="s14">
+  <h1><span class="warn">Slate Business Journal</span></h1>
+  <h3>J&clubs;</h3>
+  <div class="floor-prompt" style="margin-top: 40px;">Read your headlines.</div>
+  <div class="floor-sub">One headline + two sentences per pitch. The class wants the real story.</div>
+</div>
+
+<!-- SLIDE 15: Open Floor -->
+<div class="slide" id="s15">
+  <h1>Open Floor</h1>
+  <ul>
+    <li>Any stakeholder can challenge any firm</li>
+    <li>Firms can respond to each other</li>
+    <li>This is where the real debate happens</li>
+  </ul>
+</div>
+
+<!-- SLIDE 16: Brand Declarations -->
+<div class="slide" id="s16">
+  <h2 style="color: #f74a4a;">Every Team Goes to the Board</h2>
+  <p style="font-size: 1.6rem; margin: 20px 0; color: #e8e8ed; font-weight: 600;">
+    Two brands. Two decisions. Write <span class="accent">SELL</span> or <span class="warn">KEEP</span> for each.
+  </p>
+  <div class="two-col" style="margin-top: 30px;">
+    <div class="firm-card" style="border-left: 4px solid #f74a4a; text-align: center;">
+      <h3 style="font-size: 2.2rem;">DUNN</h3>
+      <p>Skate/surf footwear. Acquired for ~$390M.<br>Declining 13%. Could divest for ~$1.8B.<br>Or invest ~$100M to turn around manufacturing.</p>
+      <p style="margin-top: 16px; font-weight: 600; font-size: 1.3rem; color: #e8e8ed;">SELL or KEEP?</p>
+    </div>
+    <div class="firm-card" style="border-left: 4px solid #f74a4a; text-align: center;">
+      <h3 style="font-size: 2.2rem;">RANK</h3>
+      <p>Streetwear. Acquired for $2.0B.<br>Has taken $735M in impairments.<br>Keep and try to recover, or sell after the write-down?</p>
+      <p style="margin-top: 16px; font-weight: 600; font-size: 1.3rem; color: #e8e8ed;">SELL or KEEP?</p>
+    </div>
+  </div>
+  <p style="margin-top: 30px; color: #888; font-size: 1.1rem;">All 10 teams — pitching firms and stakeholders — write their position. No hedging. Commit.</p>
+</div>
+
+<!-- SLIDE 17: Debrief -->
+<div class="slide" id="s18">
+  <h2>Debrief</h2>
+  <ul>
+    <li>What separated the strong pitches from the weak ones?</li>
+    <li>The three executives <span class="accent">disagreed with each other</span>. Did anyone catch it?</li>
+    <li>What would you do differently with more time?</li>
+  </ul>
+</div>
+
+<!-- SLIDE 19: Vote -->
+<div class="slide" id="s19">
+  <h2>Which Firm Would You Hire?</h2>
+  <div class="vote-options">
+    <div class="vote-card">
+      <h3>K&spades; Apex</h3>
+      <p>Full turnaround</p>
+    </div>
+    <div class="vote-card">
+      <h3>K&hearts; Ridgeline</h3>
+      <p>Financial restructuring</p>
+    </div>
+    <div class="vote-card">
+      <h3>K&clubs; Ironbridge</h3>
+      <p>Operations first</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 20: Deliverables -->
+<div class="slide" id="s20">
+  <h2>Turn In Before You Leave</h2>
+  <div class="deliv-grid">
+    <div class="deliv-item">
+      <span class="role">K&spades; Apex</span>
+      <span class="what">What the other firms got right or wrong</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">K&hearts; Ridgeline</span>
+      <span class="what">What the other firms got right or wrong</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">K&clubs; Ironbridge</span>
+      <span class="what">What the other firms missed operationally</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">Q&spades; Thornfield</span>
+      <span class="what">Investment recommendation: increase, hold, or exit</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">Q&clubs; Meridian</span>
+      <span class="what">Credit assessment: upgrade, hold, or downgrade</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">J&hearts; Larkwell</span>
+      <span class="what">Analyst rating: buy, hold, or sell</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">Q&hearts; Allied Workforce</span>
+      <span class="what">Workforce impact statement</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">J&diams; Blackthorn</span>
+      <span class="what">Valuation opinion on portfolio moves</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">J&clubs; Slate</span>
+      <span class="what">Headlines already read aloud</span>
+    </div>
+    <div class="deliv-item">
+      <span class="role">Q&diams; GreenMark</span>
+      <span class="what">ESG risk assessment</span>
+    </div>
+  </div>
+  <div style="display:flex; align-items:center; gap:40px; margin-top:24px;">
+    <div style="background:#fff; padding:14px; border-radius:10px; flex-shrink:0;">
+      <canvas id="qr-canvas" width="180" height="180"></canvas>
+    </div>
+    <div>
+      <p style="color:#e8e8ed; font-size:1.3rem; font-weight:600; margin-bottom:8px;">Submit before you leave</p>
+      <p style="color:#888; font-size:1rem;" id="qr-url-display"></p>
+      <p style="color:#555; font-size:0.9rem; margin-top:6px;">Scan or open on your laptop</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide-counter" id="counter"></div>
+
+<script>
+  // ===== QR CODE CONFIG =====
+  // REPLACE with your Google Form URL before class:
+  const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdNBiqNRCtJGy4nUnkQNyR1JqqTfYEm3jVms5DioI4kX2_XGQ/viewform';
+  // ==========================
+
+  function generateQR() {
+    const canvas = document.getElementById('qr-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const size = canvas.width;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size + '&data=' + encodeURIComponent(FORM_URL);
+    img.onload = () => ctx.drawImage(img, 0, 0, size, size);
+    img.onerror = () => {
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, size, size);
+      ctx.fillStyle = '#000';
+      ctx.font = '12px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('No internet — use URL below', size/2, size/2);
+    };
+    const urlDisplay = document.getElementById('qr-url-display');
+    if (urlDisplay) urlDisplay.textContent = FORM_URL;
+  }
+  generateQR();
+
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, slides.length - 1));
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  showSlide(0);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      showSlide(current + 1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      showSlide(current - 1);
+    } else if (e.key === 't' || e.key === 'T') {
+      const timer = slides[current].querySelector('.timer-display');
+      if (timer) toggleTimer(timer);
+    }
+  });
+
+  const timers = {};
+
+  document.querySelectorAll('.timer-display').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => toggleTimer(el));
+  });
+
+  function toggleTimer(el) {
+    const id = el.id;
+    if (timers[id] && timers[id].running) {
+      clearInterval(timers[id].interval);
+      timers[id].running = false;
+      el.classList.remove('running');
+    } else {
+      if (!timers[id]) {
+        timers[id] = { seconds: parseInt(el.dataset.seconds), running: false, interval: null };
+      }
+      timers[id].running = true;
+      el.classList.add('running');
+      el.classList.remove('expired', 'warning');
+
+      timers[id].interval = setInterval(() => {
+        timers[id].seconds--;
+        if (timers[id].seconds <= 0) {
+          timers[id].seconds = 0;
+          clearInterval(timers[id].interval);
+          timers[id].running = false;
+          el.classList.remove('running', 'warning');
+          el.classList.add('expired');
+        } else if (timers[id].seconds <= 30) {
+          el.classList.remove('running');
+          el.classList.add('warning');
+        }
+        updateTimerDisplay(el, timers[id].seconds);
+      }, 1000);
+    }
+  }
+
+  function updateTimerDisplay(el, secs) {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+  }
+</script>
+
+</body>
+</html>

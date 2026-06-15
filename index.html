@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Toolbox</title>
+<meta name="description" content="Classroom-tested AI activities, bots, simulations, and live cases from real strategy courses. Every one grounded in something real. Take what is useful.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Toolbox">
+<meta property="og:description" content="Classroom-tested AI activities, bots, simulations, and live cases. Take what is useful.">
+<meta property="og:image" content="https://iamstevenhyde.github.io/toolbox/assets/img/toolbox-logo-lockup.png">
+<meta property="og:url" content="https://iamstevenhyde.github.io/toolbox/">
+<link rel="canonical" href="https://iamstevenhyde.github.io/toolbox/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+<style>
+.lit-badge{position:absolute;bottom:18px;right:18px;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;background:var(--teal);color:var(--bone);padding:4px 9px;border-radius:2px;pointer-events:none}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+</head>
+<body class="wall">
+<div class="topstrip"></div>
+<header class="site"><div class="sheet">
+  <div class="topbar">
+    <a class="brand" href="./index.html"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><mask id="tbm"><path d="M36,26 A14,14 0 0 1 64,26 Z" fill="#fff"/><circle cx="50" cy="26" r="7" fill="#000"/><rect x="12" y="26" width="76" height="62" rx="9" fill="#fff"/><rect x="12" y="46" width="76" height="3.5" fill="#000"/><rect x="12" y="67" width="76" height="3.5" fill="#000"/><circle cx="50" cy="56.5" r="4.2" fill="#000"/><circle cx="50" cy="77.5" r="4.2" fill="#000"/></mask><g id="tbmark"><rect width="100" height="100" mask="url(#tbm)" fill="currentColor"/></g></svg><span class="wm">The Toolbox</span></a>
+    <nav class="nav">
+      <a href="./index.html" class="on">The Bench</a>
+      <a href="./chapters.html">Chapters</a>
+      <a href="./cases.html">Cases</a>
+      <a href="./about.html">About</a>
+      <a href="./submit.html">Submit</a>
+    </nav>
+    <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
+    <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
+  </div>
+</div></header>
+
+<section class="hero"><div class="sheet">
+  <div class="kicker">A working catalog of AI classroom tools</div>
+  <h1>Toolbox<i>.</i></h1>
+  <p class="manifesto">Exercises, custom GPTs, and live cases, classroom-tested with real students. Every one is grounded in something real. <em>Take what is useful.</em></p>
+  <div class="herodex">
+    <a href="#bench"><b>The Bench</b><span>The tools themselves. Bots, simulations, live cases, exercises, and frameworks, each with a full instructor kit.</span></a>
+    <a href="./chapters.html"><b>The Ledger</b><span>Courses run without a textbook. Each week is a NotebookLM of the foundational sources.</span></a>
+    <a href="./cases.html"><b>The Shelf</b><span>Teaching cases, published and in review, each built on something that actually happened.</span></a>
+    <a href="./about.html"><b>About</b><span>What the Toolbox is, the make-and-share model behind it, and the work it stands on.</span></a>
+  </div>
+  <svg class="heromark" viewBox="0 0 100 100" aria-hidden="true"><use href="#tbmark"/></svg>
+</div></section>
+
+<section class="shelf" id="bench"><div class="sheet">
+  <div class="benchkick">The Bench</div>
+  <div class="chips" id="chips"></div>
+  <div class="chips chips2" id="chips2"></div>
+  <div class="count" id="count"></div>
+</div></section>
+
+<main class="sheet"><div class="gallery" id="grid"></div></main>
+
+<footer class="site"><div class="sheet"><div class="row">
+  <span><svg class="mark sm" viewBox="0 0 100 100" aria-hidden="true"><use href="#tbmark"/></svg>Steven J. Hyde · Associate Professor of Management · Boise State</span>
+  
+  <span>Grounded in reality</span>
+</div></div></footer>
+
+<script src="assets/data.js"></script>
+<script>
+const B = window.HT.bench;
+// Stable display order: weave the "from the literature" tools through the rest
+// so they don't pile up at the bottom. Card numbering follows this order.
+const ORDER = (() => {
+  const lits = B.filter(x=>x.lit), mine = B.filter(x=>!x.lit), seq = [];
+  let li = 0;
+  mine.forEach((x,i) => { seq.push(x); if((i+1)%3===0 && li<lits.length) seq.push(lits[li++]); });
+  while(li<lits.length) seq.push(lits[li++]);
+  return seq;
+})();
+const KINDS = ["All", ...[...new Set(B.map(x=>x.k))], "AI-built", "From the literature"];
+const PLATS = ["Any platform", ...[...new Set(B.map(x=>x.run&&x.run.platform).filter(Boolean))]];
+let active = "All", plat = "Any platform";
+const chips = document.getElementById("chips");
+chips.innerHTML = KINDS.map(k=>`<span class="${k==='All'?'on':''}" data-k="${k}">${k}</span>`).join("");
+const chips2 = document.getElementById("chips2");
+chips2.innerHTML = PLATS.map(p=>`<span class="${p==='Any platform'?'on':''}" data-p="${p}">${p}</span>`).join("");
+function match(x){
+  const kOk = active==="All" || (active==="AI-built" ? x.ai : active==="From the literature" ? x.lit : x.k===active);
+  const pOk = plat==="Any platform" || (x.run && x.run.platform===plat);
+  return kOk && pOk;
+}
+function render(){
+  const out = ORDER.filter(match);
+  const filtering = active !== "All" || plat !== "Any platform";
+  document.getElementById("count").textContent = filtering ? `${out.length} of ${B.length}` : "a working wall of classroom tools";
+  const g = document.getElementById("grid");
+  g.innerHTML = out.length ? out.map(x=>{
+    const no = String(ORDER.indexOf(x)+1).padStart(2,"0");
+    return `
+    <a class="painting" href="./tool.html?id=${x.id}">
+      <div class="frame">
+        <span class="cover" role="img" aria-label="${x.n} cover" style="background-image:url('assets/img/covers/${x.cover}')"></span>
+        <span class="tags"><span class="k">${x.k}</span>${x.ai?'<span class="ai">AI</span>':''}</span>
+        ${x.lit?'<span class="lit-badge">Literature</span>':''}
+      </div>
+      <span class="placard">
+        <span class="no">No. ${no}</span>
+        <span class="ct" style="display:block">${x.n}</span>
+        <span class="cg" style="display:block">${x.g}</span>
+      </span>
+    </a>`;}).join("") : `<div class="empty">Nothing hangs here. Clear the filter.</div>`;
+  window.HTreveal && HTreveal(".painting");
+}
+chips.addEventListener("click", e=>{ const s=e.target.closest("span[data-k]"); if(!s) return;
+  active=s.dataset.k; [...chips.children].forEach(c=>c.classList.toggle("on",c.dataset.k===active)); render(); });
+chips2.addEventListener("click", e=>{ const s=e.target.closest("span[data-p]"); if(!s) return;
+  plat=s.dataset.p; [...chips2.children].forEach(c=>c.classList.toggle("on",c.dataset.p===plat)); render(); });
+render();
+</script>
+<script src="./assets/cmdk.js"></script>
+<script>window.addEventListener("DOMContentLoaded",()=>HTreveal(".painting"));</script>
+</body>
+</html>

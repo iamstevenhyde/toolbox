@@ -1,0 +1,314 @@
+/* ==================================================================
+   The Toolbox v2 — "Night Gallery, Working Paper"
+   Covers hang like paintings in a night gallery. The reading
+   surfaces stay warm working paper. The orb recurs: low sun,
+   wax seal, end period. Fraunces pushed big; mono as engraving.
+   ================================================================== */
+:root{
+  --night:#171410; --night2:#1f1a13; --night3:#292218;
+  --bone:#ece4d2; --bone-dim:#b8ad97; --bone-faint:#7d745f;
+  --ember:#ef7a2a; --verm:#cf4a1e; --verm-dk:#9b3414;
+  --paper:#f1ece1; --paper2:#e8e1d1; --card:#f8f3e8;
+  --ink:#1d1a14; --soft:#6b6452; --faint:#9a9078;
+  --rule:#d6cdb8; --rule2:#e2dac6; --nrule:#3a3225;
+  --teal:#2c4a47; --teal-lt:#7da39e;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--bone);font-family:"Newsreader",Georgia,serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--verm);color:#fff}
+.sheet{max-width:1240px;margin:0 auto;padding:0 48px}
+
+/* the wall: grain over the night register */
+.wall{position:relative}
+.wall::before{content:"";position:absolute;inset:0;background:var(--grain);opacity:.05;pointer-events:none;mix-blend-mode:overlay}
+
+/* ---------- chrome ---------- */
+.topstrip{height:4px;background:linear-gradient(90deg,var(--verm) 0 60%,var(--ember) 100%)}
+header.site{position:relative;z-index:5}
+.topbar{display:flex;align-items:center;gap:14px;padding:26px 0 18px;border-bottom:1px solid var(--nrule);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:13px}
+.orb{width:15px;height:15px;border-radius:50%;background:var(--ember);flex:none;box-shadow:0 0 18px rgba(239,122,42,.55)}
+.mark{width:25px;height:25px;color:var(--ember);flex:none;filter:drop-shadow(0 2px 10px rgba(239,122,42,.4))}
+.mark.sm{width:15px;height:15px;vertical-align:-3px;margin-right:10px}
+.brand .wm{font-family:"Fraunces",serif;font-weight:700;font-size:23px;letter-spacing:-.4px;color:var(--bone)}
+.nav{margin-left:26px;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);display:flex;gap:24px}
+.nav a{padding-bottom:4px;border-bottom:1px solid transparent;transition:.15s}
+.nav a:hover{color:var(--ember)}
+.nav a.on{color:var(--bone);border-color:var(--ember)}
+.srch{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--bone-dim);border:1px solid var(--nrule);
+  padding:8px 14px;border-radius:99px;cursor:pointer;display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.03);transition:.15s}
+.srch:hover,.srch:focus-visible{border-color:var(--ember);color:var(--ember);outline:none}
+.srch kbd{font-family:"JetBrains Mono",monospace;background:rgba(255,255,255,.06);border:1px solid var(--nrule);border-radius:4px;padding:1px 6px;font-size:10px}
+.burger{display:none;font-size:19px;line-height:1;background:transparent;border:1px solid var(--nrule);border-radius:8px;color:var(--bone);padding:7px 12px;cursor:pointer}
+.burger:hover{border-color:var(--ember);color:var(--ember)}
+
+/* ---------- hero (the night sun) ---------- */
+.hero{position:relative;padding:84px 0 64px;overflow:hidden}
+.hero .kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ember);animation:rise .7s .05s both}
+.hero h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(64px,10vw,148px);line-height:.92;letter-spacing:-.035em;color:var(--bone);margin:18px 0 26px;max-width:11ch;animation:rise .8s .15s both}
+.hero h1 i{font-style:italic;font-weight:500;color:var(--ember)}
+.hero .manifesto{font-size:clamp(17px,1.6vw,21px);color:var(--bone-dim);max-width:52ch;animation:rise .8s .3s both}
+.hero .manifesto em{font-style:italic;color:var(--bone)}
+.herodex{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:42px;position:relative;z-index:2;animation:rise .8s .45s both}
+.herodex a{display:flex;flex-direction:column;gap:7px;padding:16px 18px 15px;border:1px solid var(--nrule);border-radius:3px;background:rgba(255,255,255,.02);transition:.15s}
+.herodex a:hover{border-color:var(--ember);background:rgba(239,122,42,.05)}
+.herodex b{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ember);font-weight:600}
+.herodex span{font-size:13.5px;color:var(--bone-dim);line-height:1.45}
+.heromark{position:absolute;right:-70px;bottom:-90px;width:400px;height:400px;color:var(--verm);pointer-events:none;animation:markrise 1.4s .2s both}
+.benchkick{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ember);padding-bottom:14px}
+.orbsun{position:absolute;right:-90px;bottom:-150px;width:340px;height:340px;border-radius:50%;background:var(--verm);
+  box-shadow:0 0 140px 30px rgba(207,74,30,.35);animation:sunup 1.4s .2s both}
+.orbsun::after{content:"";position:absolute;inset:-60px;border-radius:50%;border:1px solid rgba(239,122,42,.18)}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes sunup{from{opacity:0;transform:translateY(80px)}to{opacity:1;transform:none}}
+@keyframes markrise{from{opacity:0;transform:translateY(80px)}to{opacity:.14;transform:none}}
+
+/* ---------- placard filter shelf ---------- */
+.shelf{border-top:1px solid var(--nrule);border-bottom:1px solid var(--nrule);padding:18px 0 16px;position:relative;z-index:4}
+.chips{display:flex;flex-wrap:wrap;gap:10px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase}
+.chips span{color:var(--bone-dim);cursor:pointer;padding:7px 14px;border:1px solid var(--nrule);border-radius:3px;background:rgba(255,255,255,.02);transition:.15s}
+.chips span:hover{color:var(--ember);border-color:var(--ember)}
+.chips span.on{color:var(--night);background:var(--ember);border-color:var(--ember);font-weight:600}
+.chips2{margin-top:10px}
+.chips2 span{border-style:dashed;font-size:9.5px;padding:5px 11px;color:var(--bone-faint)}
+.chips2 span.on{color:var(--night);background:var(--teal-lt);border-color:var(--teal-lt);border-style:solid}
+.count{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--bone-faint);padding:16px 0 0}
+
+/* ---------- the gallery ---------- */
+.gallery{display:grid;grid-template-columns:repeat(5,1fr);gap:46px 30px;padding:48px 0 90px}
+.painting{display:flex;flex-direction:column;position:relative;opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.painting.in{opacity:1;transform:none}
+.painting:focus-visible{outline:2px solid var(--ember);outline-offset:6px}
+.frame{position:relative;padding:10px;background:var(--night3);border:1px solid var(--nrule);
+  box-shadow:0 30px 50px -28px rgba(0,0,0,.9),inset 0 0 0 1px rgba(255,255,255,.03);transition:transform .35s ease,box-shadow .35s ease}
+.frame::before{content:"";position:absolute;left:18%;right:18%;top:-26px;height:26px;
+  background:radial-gradient(60% 100% at 50% 0,rgba(239,122,42,.16),transparent 75%);pointer-events:none;opacity:.8;transition:.35s}
+.frame .cover{aspect-ratio:3/4;background-color:#241e14;background-size:cover;background-position:center;display:block;
+  filter:brightness(.94) saturate(.98);transition:filter .35s ease}
+.painting:hover .frame{transform:translateY(-7px);box-shadow:0 44px 64px -30px rgba(0,0,0,.95),inset 0 0 0 1px rgba(255,255,255,.05)}
+.painting:hover .frame::before{opacity:1.2}
+.painting:hover .cover{filter:brightness(1.04) saturate(1.05)}
+.tags{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;pointer-events:none}
+.tags .k,.tags .ai{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 8px;border-radius:2px}
+.tags .k{background:rgba(13,10,7,.82);color:var(--bone)}
+.tags .ai{background:var(--verm);color:#fff}
+.placard{display:block;margin:16px auto 0;background:var(--card);color:var(--ink);padding:13px 16px 12px;width:88%;border-radius:2px;
+  box-shadow:0 10px 22px -14px rgba(0,0,0,.8);position:relative}
+.placard .no{display:block}
+.placard::after{content:"";position:absolute;top:-7px;left:50%;width:6px;height:6px;border-radius:50%;background:var(--verm);transform:translateX(-50%)}
+.placard .no{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:2px;color:var(--faint)}
+.placard .ct{font-family:"Fraunces",serif;font-weight:600;font-size:17.5px;line-height:1.08;margin:3px 0 4px}
+.placard .cg{font-style:italic;font-size:12.5px;color:var(--soft);line-height:1.35}
+.empty{grid-column:1/-1;text-align:center;padding:70px 0;font-style:italic;color:var(--bone-faint);font-size:17px}
+
+/* ---------- footer ---------- */
+footer.site{border-top:1px solid var(--nrule);padding:30px 0 70px;font-family:"JetBrains Mono",monospace;font-size:10.5px;
+  letter-spacing:1px;color:var(--bone-faint);background:var(--night)}
+footer.site .row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+footer.site .orb{width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:10px}
+footer.site a{color:var(--bone-dim);border-bottom:1px dotted var(--bone-faint)}
+footer.site a:hover{color:var(--ember);border-color:var(--ember)}
+
+/* ==================================================================
+   THE WORKING PAPER register
+   ================================================================== */
+.paperzone{background:var(--paper);color:var(--ink);position:relative}
+.paperzone::before{content:"";position:absolute;inset:0 0 auto 0;height:7px;background:linear-gradient(rgba(0,0,0,.28),transparent)}
+
+/* ---------- tool detail: the hang + the sheet ---------- */
+.back{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--bone-dim);margin:30px 0 0}
+.back:hover{color:var(--ember)}
+.hang{display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:64px;padding:46px 0 76px;align-items:center}
+.hang .frame{max-width:420px}
+.hang .frame::before{left:10%;right:10%;top:-34px;height:34px}
+.hang .dk{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--ember)}
+.hang .spec-no{font-family:"Fraunces",serif;font-style:italic;font-size:15px;color:var(--bone-faint);margin-left:14px}
+.hang h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(40px,5vw,76px);line-height:.98;letter-spacing:-.025em;margin:16px 0 22px;color:var(--bone)}
+.hang .dg{font-style:italic;font-size:18px;color:var(--bone-dim);border-left:3px solid var(--verm);padding-left:18px;max-width:50ch}
+.hang .dg a{color:var(--bone);border-bottom:1px solid var(--ember)}
+.hang .dg a:hover{color:var(--ember)}
+.hang .actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;padding:13px 22px;
+  border-radius:99px;display:inline-flex;gap:9px;align-items:center;transition:.15s;border:1px solid var(--nrule);color:var(--bone-dim)}
+.btn.primary{background:var(--verm);border-color:var(--verm);color:#fff;box-shadow:0 8px 24px -10px rgba(207,74,30,.6)}
+.btn.primary:hover{background:var(--ember);border-color:var(--ember)}
+.dsheet{padding:58px 0 90px}
+.dsheet .cols{display:grid;grid-template-columns:1fr 320px;gap:70px;align-items:start}
+.dblurb{font-size:clamp(20px,2vw,25px);line-height:1.5;font-family:"Fraunces",serif;font-weight:500;max-width:30ch;letter-spacing:-.01em}
+.dblurb::first-letter{color:var(--verm)}
+.dsub{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--verm);margin:34px 0 10px;display:flex;align-items:center;gap:12px}
+.dsub::after{content:"";flex:1;height:1px;background:var(--rule)}
+.dhow{font-size:16.5px;line-height:1.6;max-width:58ch;color:var(--ink)}
+/* engraved field-notes plate */
+.specs{display:flex;flex-wrap:wrap;border:1px solid var(--ink);background:var(--card);box-shadow:4px 4px 0 var(--paper2)}
+.spec{display:flex;flex-direction:column;gap:3px;padding:14px 20px;border-right:1px solid var(--rule);flex:1 1 auto;min-width:100px}
+.spec:last-child{border-right:none}
+.spec .sl{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+.spec .sv{font-family:"Fraunces",serif;font-size:16.5px;color:var(--ink)}
+/* letterpress prompt block: night ink pressed into the paper */
+.promptbox{position:relative;background:var(--night);color:var(--bone);border-radius:4px;overflow:hidden;box-shadow:inset 0 2px 14px rgba(0,0,0,.6),6px 6px 0 var(--paper2)}
+.promptbox pre{font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.65;padding:22px 24px;margin:0;white-space:pre-wrap;max-height:360px;overflow:auto}
+.promptbox::before{content:"";position:absolute;inset:0;background:var(--grain);opacity:.06;pointer-events:none}
+.copybtn{position:absolute;top:12px;right:12px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  background:var(--ember);color:var(--night);border:none;border-radius:99px;padding:7px 14px;cursor:pointer;font-weight:600}
+.copybtn:hover{background:var(--bone)}
+.mats{list-style:none;margin:4px 0 0}
+.mats li{display:flex;align-items:baseline;gap:14px;padding:10px 0;border-bottom:1px dotted var(--rule);font-size:15px}
+.mats li .mk{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);
+  background:var(--paper2);border:1px solid var(--rule);border-radius:2px;padding:3px 8px;flex:none;min-width:86px;text-align:center}
+.mats li a{color:var(--verm);border-bottom:1px solid transparent}
+.mats li a:hover{border-color:var(--verm)}
+.steps{list-style:none;counter-reset:step;margin:4px 0 0;max-width:58ch}
+.steps li{counter-increment:step;display:flex;gap:14px;padding:10px 0;border-bottom:1px dotted var(--rule);font-size:15.5px;line-height:1.55}
+.steps li::before{content:counter(step,decimal-leading-zero);font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--verm);padding-top:3px;flex:none}
+.debrief{list-style:none;margin:4px 0 0;max-width:58ch}
+.debrief li{padding:10px 0 10px 24px;border-bottom:1px dotted var(--rule);font-size:15.5px;line-height:1.55;position:relative}
+.debrief li::before{content:"?";position:absolute;left:2px;top:10px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--verm)}
+.sidecol .note{background:var(--card);border:1px solid var(--rule);padding:20px 22px;font-size:14.5px;line-height:1.6;color:var(--soft);font-style:italic;position:relative}
+.sidecol .note::before{content:"";position:absolute;top:-6px;left:22px;width:11px;height:11px;border-radius:50%;background:var(--verm)}
+
+/* ---------- chapters: the ledger ---------- */
+.lead-band{padding:58px 0 40px}
+.lead-band .kicker{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ember)}
+.lead-band h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(44px,6.5vw,92px);line-height:.95;letter-spacing:-.03em;color:var(--bone);margin:14px 0 18px}
+.lead-band h1 i{font-style:italic;color:var(--ember);font-weight:500}
+.lead-band p{color:var(--bone-dim);max-width:56ch;font-size:17px}
+.course{padding:46px 0 26px}
+.course-head{display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:12px}
+.course-head h2{font-family:"Fraunces",serif;font-weight:700;font-size:30px;letter-spacing:-.02em}
+.course-head .meta{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--soft);text-transform:uppercase;letter-spacing:2px}
+.course>.note{font-style:italic;color:var(--soft);margin:14px 0 8px;max-width:62ch}
+.chapter{display:grid;grid-template-columns:96px 1fr 240px 160px;gap:24px;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule)}
+.chapter:hover{background:linear-gradient(90deg,transparent,rgba(207,74,30,.045),transparent)}
+.chapter .no{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:44px;color:var(--verm);line-height:1;opacity:.85}
+.chapter .nm{font-family:"Fraunces",serif;font-weight:600;font-size:21px;line-height:1.1}
+.chapter .src{font-size:13px;color:var(--soft);font-style:italic}
+.chapter .lab{justify-self:end}
+.nlm{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:8px 14px;border-radius:2px;border:1px solid var(--teal);color:var(--teal);display:inline-flex;gap:8px;align-items:center}
+.nlm:hover{background:var(--teal);color:var(--paper)}
+.nlm.tbd{border-style:dashed;border-color:var(--rule);color:var(--faint);cursor:default}
+.nlm.tbd:hover{background:transparent;color:var(--faint)}
+
+/* ---------- cases: the shelf ---------- */
+.cases{padding:26px 0 80px}
+.case{display:grid;grid-template-columns:130px 1fr 170px;gap:34px;align-items:center;padding:30px 0;border-bottom:1px solid var(--rule)}
+.case .cvframe{padding:6px;background:#fff;border:1px solid var(--rule);box-shadow:0 16px 26px -16px rgba(40,30,10,.55);transform:rotate(-1.2deg);transition:.3s}
+.case:nth-child(even) .cvframe{transform:rotate(1deg)}
+.case:hover .cvframe{transform:rotate(0) translateY(-4px)}
+.case .cv{aspect-ratio:3/4;background:#ded5bf center/cover no-repeat;display:block}
+.case .nm{font-family:"Fraunces",serif;font-weight:600;font-size:26px;line-height:1.05;letter-spacing:-.015em}
+.case .cite{font-size:14px;color:var(--soft);margin-top:7px}
+.case .desc{font-size:15px;color:var(--ink);margin-top:9px;font-style:italic;opacity:.85;max-width:58ch}
+.stamp{justify-self:end;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 13px;
+  border:2px solid;border-radius:3px;text-align:center;transform:rotate(3deg);opacity:.85}
+.stamp.pub{border-color:var(--teal);color:var(--teal)}
+.stamp.rev{border-color:var(--verm);color:var(--verm)}
+
+/* ---------- research: the night archive ---------- */
+.rlead{padding:64px 0 46px;position:relative;overflow:hidden}
+.rlead .orbsun{right:auto;left:-130px;bottom:-220px;opacity:.55}
+.pubs{padding:10px 0 90px;position:relative;z-index:2}
+.pub{display:grid;grid-template-columns:110px 1fr 150px;gap:30px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--nrule)}
+.pub:hover{background:linear-gradient(90deg,rgba(239,122,42,.04),transparent 60%)}
+.pub .yr{font-family:"Fraunces",serif;font-style:italic;font-size:34px;color:var(--ember);opacity:.9}
+.pub .ti{font-family:"Fraunces",serif;font-weight:600;font-size:25px;line-height:1.08;color:var(--bone);letter-spacing:-.015em}
+.pub .au{font-size:14px;color:var(--bone-faint);margin-top:6px}
+.pub .ar{font-size:15px;color:var(--bone-dim);font-style:italic;margin-top:9px;max-width:62ch}
+.pub .ven{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--teal-lt);text-align:right;text-transform:uppercase;letter-spacing:1px;line-height:1.6}
+.pub .media{margin-top:10px;display:flex;gap:7px;flex-wrap:wrap}
+.pub .media span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:var(--bone-faint);border:1px solid var(--nrule);padding:3px 8px;border-radius:2px}
+.pub .award{color:var(--ember);border-color:var(--ember)!important}
+.revtag{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ember);border:1px solid var(--ember);border-radius:99px;padding:4px 10px;margin-left:14px;vertical-align:middle;white-space:nowrap}
+.plink{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--teal-lt);border:1px solid var(--teal-lt);padding:4px 10px;border-radius:2px}
+.plink:hover{background:var(--teal-lt);color:var(--night)}
+
+/* ---------- submit: the inbox ---------- */
+.formfallback{background:var(--card);border:1px solid var(--rule);box-shadow:6px 6px 0 var(--paper2);padding:34px 38px 30px;max-width:660px}
+.formfallback p{font-size:16px;line-height:1.6;color:var(--ink);max-width:54ch}
+.formfallback .dsub{margin-top:0}
+.formfallback .btn{margin-top:24px}
+.tform{background:var(--card);border:1px solid var(--rule);box-shadow:6px 6px 0 var(--paper2);padding:34px 38px 30px;max-width:720px}
+.tform .trow{margin-bottom:18px}
+.tform .trow.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tform label{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--soft)}
+.tform input[type=text],.tform input[type=email],.tform input[type=url],.tform select,.tform textarea{
+  display:block;width:100%;margin-top:7px;padding:11px 13px;border:1px solid var(--rule);border-radius:2px;
+  background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:15.5px;line-height:1.45}
+.tform input:focus,.tform select:focus,.tform textarea:focus{outline:none;border-color:var(--verm)}
+.tform textarea{resize:vertical}
+.tform ::placeholder{color:var(--faint);font-style:italic}
+.tform .tcheck{display:flex;gap:10px;align-items:baseline;font-family:"Newsreader",Georgia,serif;font-size:14.5px;
+  letter-spacing:0;text-transform:none;color:var(--ink);margin:4px 0 22px;max-width:54ch;cursor:pointer}
+.tform .tcheck input{accent-color:var(--verm);flex:none}
+.tform .btn{border:none;cursor:pointer}
+.tform .finehint,.formfallback .finehint{font-size:13.5px;color:var(--soft);font-style:italic;margin-left:16px}
+.tform .finehint a{color:var(--verm);border-bottom:1px dotted var(--verm)}
+@media(max-width:600px){.tform .trow.two{grid-template-columns:1fr}.tform{padding:26px 22px}}
+
+/* ---------- student work: museum placards ---------- */
+.swnote{background:rgba(255,255,255,.03);border:1px solid var(--nrule);border-radius:4px;padding:18px 22px;margin:8px 0 0;font-size:14.5px;color:var(--bone-dim);font-style:italic;max-width:72ch}
+.swgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:44px 0 90px}
+.sw{display:flex;flex-direction:column;opacity:0;transform:translateY(26px);transition:opacity .6s,transform .6s}
+.sw.in{opacity:1;transform:none}
+.sw .ghost{aspect-ratio:16/9;border:1px dashed var(--nrule);border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bone-faint)}
+.sw .label{background:var(--card);color:var(--ink);margin:-16px 16px 0;padding:15px 17px 14px;border-radius:2px;box-shadow:0 14px 26px -16px rgba(0,0,0,.85);position:relative}
+.sw .label::after{content:"";position:absolute;top:-6px;left:50%;width:6px;height:6px;border-radius:50%;background:var(--verm);transform:translateX(-50%)}
+.sw .code{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase}
+.sw .code .lens{color:var(--verm)} .sw .code .typ{color:var(--soft)}
+.sw .nm{font-family:"Fraunces",serif;font-weight:600;font-size:18px;line-height:1.12;margin:7px 0 5px}
+.sw .by{font-size:12.5px;color:var(--faint);font-style:italic}
+
+/* ---------- command deck: dark glass ---------- */
+.cmdk{position:fixed;inset:0;z-index:99;background:rgba(10,8,5,.62);backdrop-filter:blur(7px);display:none;align-items:flex-start;justify-content:center;padding-top:11vh}
+.cmdk.show{display:flex}
+.cmdbox{width:min(680px,94vw);background:rgba(31,26,19,.96);border:1px solid var(--nrule);border-radius:14px;overflow:hidden;
+  box-shadow:0 60px 120px -30px rgba(0,0,0,.95),0 0 0 1px rgba(239,122,42,.07);animation:deck .25s ease both}
+@keyframes deck{from{opacity:0;transform:translateY(-14px) scale(.985)}to{opacity:1;transform:none}}
+.cmdbox .in{display:flex;align-items:center;gap:13px;padding:19px 22px;border-bottom:1px solid var(--nrule)}
+.cmdbox .in .ar{color:var(--ember);font-weight:700;font-family:"JetBrains Mono",monospace}
+.cmdbox input{flex:1;border:none;outline:none;background:transparent;font-family:"Fraunces",serif;font-size:21px;color:var(--bone)}
+.cmdbox input::placeholder{color:var(--bone-faint)}
+.cmdres{max-height:46vh;overflow:auto;padding:7px}
+.cr{display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:8px;cursor:pointer}
+.cr.sel{background:rgba(239,122,42,.12)}
+.cr .ck{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--bone-dim);background:rgba(255,255,255,.05);border:1px solid var(--nrule);padding:4px 8px;border-radius:3px;width:98px;text-align:center;flex:none}
+.cr.sel .ck{background:var(--ember);color:var(--night);border-color:var(--ember);font-weight:600}
+.cr .cn{font-family:"Fraunces",serif;font-size:16.5px;color:var(--bone)}
+.cr .cgg{margin-left:auto;font-style:italic;font-size:12px;color:var(--bone-faint);flex:none}
+.cmdfoot{padding:10px 20px;border-top:1px solid var(--nrule);font-family:"JetBrains Mono",monospace;font-size:9.5px;color:var(--bone-faint);display:flex;gap:18px;letter-spacing:1px}
+.cmdempty{padding:24px 16px;color:var(--bone-faint);font-style:italic}
+
+/* ---------- responsive ---------- */
+@media(max-width:1100px){.gallery{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:980px){
+  .sheet{padding:0 24px}
+  .gallery{grid-template-columns:repeat(2,1fr);gap:44px 26px}
+  .swgrid{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .burger{display:block;margin-left:6px}
+  .nav.open{display:flex;flex-direction:column;gap:14px;width:100%;order:9;margin-left:0;padding-top:16px}
+  .hang{grid-template-columns:1fr;gap:40px}
+  .hang .frame{max-width:340px}
+  .dsheet .cols{grid-template-columns:1fr;gap:34px}
+  .chapter{grid-template-columns:64px 1fr;gap:12px}
+  .chapter .no{font-size:32px}
+  .chapter .src,.chapter .lab{grid-column:2;justify-self:start}
+  .case{grid-template-columns:90px 1fr;gap:20px}
+  .case .stamp{grid-column:2;justify-self:start}
+  .pub{grid-template-columns:64px 1fr;gap:18px}
+  .pub .ven{grid-column:2;text-align:left}
+  .orbsun{width:230px;height:230px;right:-70px;bottom:-110px}
+  .herodex{grid-template-columns:1fr 1fr}
+  .heromark{width:260px;height:260px;right:-60px;bottom:-60px}
+}
+@media(max-width:600px){.gallery,.swgrid{grid-template-columns:1fr}.hero{padding:60px 0 48px}.herodex{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .painting,.sw{opacity:1;transform:none}
+}
