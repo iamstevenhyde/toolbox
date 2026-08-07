@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Toolbox — Tool</title>
+<title>The Toolbox · Tool</title>
 <meta name="description" content="A classroom activity from The Toolbox: what it is, how it runs, and the materials to run it yourself.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Toolbox">
@@ -72,7 +72,7 @@ if(!t){
     <div class="dg">That tool is not on the bench. <a href="./index.html">Browse the gallery →</a></div>
   </div></div></div>`;
 } else {
-  document.title = `The Toolbox — ${t.n}`;
+  document.title = `The Toolbox · ${t.n}`;
   const no = String(B.indexOf(t)+1).padStart(2,"0");
   const srcBlock = t.lit ? `<div class="src-block"><span class="src-label">Published activity</span><span class="src-cite">${t.citation||''}</span>${t.doi?`<a class="src-doi" href="${t.doi}" target="_blank">${t.doi}</a>`:''}</div>` : '';
   const siblings = (t.series && B.filter(x=>x.series===t.series && x.id!==t.id)) || [];

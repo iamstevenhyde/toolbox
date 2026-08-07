@@ -543,22 +543,6 @@ window.HT = {
      how:"Students used it to quiz themselves on the chapter before exams.",
      note:"Among the earliest teaching bots, built on Poe.",
      materials:[{l:"StudyBud (Poe)",k:"bot"}]},
-    {id:"org-design-lab", n:"Organizational Design Lab", k:"Simulation", ai:true, cover:"org-design-lab.webp",
-     run:{level:"MBA", platform:"HTML file", prep:"none"},
-     g:"structure, control, and strategy-structure fit",
-     blurb:"A sandbox where students push structure levers with sliders and toggles and watch the operating metrics move in real time, then read why each trade-off matters.",
-     purpose:"Structure is usually taught as boxes on a chart. The Lab makes it a dial: push the levers, watch the operating metrics react, and feel why every design choice is a trade-off.",
-     how:"Built for the org-design unit (MBA 546). Students configure a structure, a dynamic advisor reacts, and they debrief the scenario.",
-     note:"Makes the strategy-structure fit tangible. Change the design, see the metrics respond. In development; it has not had a classroom run yet.",
-     materials:[{l:"Org Design Lab (HTML game)",k:"game"},{l:"Chapter 12 deck",k:"slides"}]},
-    {id:"structural-surgery", n:"Structural Surgery", k:"Simulation", ai:true, cover:"structural-surgery.webp",
-     run:{level:"MBA", platform:"HTML file", prep:"none"},
-     g:"strategy execution and structural fit (Hill & Jones)",
-     blurb:"A diagnose-and-prescribe game. Students read an ailing firm's symptoms, name the underlying structural failure, then prescribe the structural and control treatments to execute the strategy, and compare their plan to the book's logic.",
-     purpose:"Diagnosis before prescription: students read a failing firm's symptoms, name the structural disease, and defend the treatment.",
-     how:"Built for the org-design unit (MBA 546). Diagnosis first, then prescription, then a check against Hill and Jones.",
-     note:"Frames organizational design as medicine. Find the disease before you write the prescription. In development; it has not had a classroom run yet.",
-     materials:[{l:"Structural Surgery (HTML game)",k:"game"}]},
     {id:"lit-job-description", n:"The AI Job Description Assignment", k:"Exercise", ai:true, lit:true, cover:"lit-job-description.webp",
      citation:"Walker, D. O. H., & Larson, M. (2025). Leveraging generative artificial intelligence (AI) for human resource management: The AI job description assignment. Journal of Management Education, 49(1), 113-141.",
      doi:"https://doi.org/10.1177/10525629241294075",
@@ -835,7 +819,7 @@ window.HT = {
   /* ---------------- CHAPTERS (two courses) ---------------- */
   chapters: {
     mba546: {
-      course:"MBA 546 — AI Strategy", note:"The textbook, rebuilt as a NotebookLM per week. Students synthesize each week into their own chapter.",
+      course:"MBA 546 · AI Strategy", note:"The textbook, rebuilt as a NotebookLM per week. Students synthesize each week into their own chapter.",
       created:false,
       items:[
         {no:1, nm:"What Is AI Strategy?", src:"Cockburn–Henderson–Stern, HAI Index, McKinsey"},
