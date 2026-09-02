@@ -83,6 +83,44 @@
       <span class="finehint">Or skip the form and <a href="mailto:iamstevenhyde@gmail.com?subject=Toolbox%20submission">email it</a>.</span>
     </div>
   </form>
+
+  <h2 class="dsub" id="ask">or just ask</h2>
+  <p style="max-width:54ch;font-size:16px;line-height:1.6;margin:0 0 26px">Not everything is a finished tool. If you have an idea, want one of these adapted for your course, or have a question about how something runs in a real room, send it here. Short notes are welcome.</p>
+
+  <div id="asknote" class="formfallback" style="display:none">
+    <div class="dsub">sent</div>
+    <p>Got it, thank you. If it needs an answer you will get one.</p>
+    <a class="btn primary" href="./index.html">back to the bench</a>
+  </div>
+  <form id="aform" class="tform" action="https://formsubmit.co/iamstevenhyde@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Toolbox idea or request">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://iamstevenhyde.github.io/toolbox/submit.html?sent=2#ask">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <div class="trow two">
+      <label>Your name<input type="text" name="name" required placeholder="Who is asking"></label>
+      <label>Email<input type="email" name="email" required placeholder="Where to reach you"></label>
+    </div>
+    <div class="trow">
+      <label>What is this
+        <select name="kind" required>
+          <option value="" disabled selected>Pick one</option>
+          <option>An idea for an activity</option>
+          <option>Can you build this for my course</option>
+          <option>A question about running one</option>
+          <option>Something else</option>
+        </select>
+      </label>
+    </div>
+    <div class="trow">
+      <label>Your note<textarea name="message" rows="5" required placeholder="Say as much or as little as you want. What are you teaching, and what is not working?"></textarea></label>
+    </div>
+    <div class="trow">
+      <button class="btn primary" type="submit">send it</button>
+      <span class="finehint">Or just <a href="mailto:iamstevenhyde@gmail.com?subject=Toolbox%20idea">email me</a>.</span>
+    </div>
+  </form>
 </main></div>
 
 <footer class="site"><div class="sheet"><div class="row">
@@ -95,9 +133,14 @@
 <script>
 // FormSubmit relay: first real submission triggers a one-time activation email
 // to iamstevenhyde@gmail.com; click it once and every submission after lands in the inbox.
-if (new URLSearchParams(location.search).get("sent") === "1") {
+var sent = new URLSearchParams(location.search).get("sent");
+if (sent === "1") {
   document.getElementById("tform").style.display = "none";
   document.getElementById("sentnote").style.display = "block";
+}
+if (sent === "2") {
+  document.getElementById("aform").style.display = "none";
+  document.getElementById("asknote").style.display = "block";
 }
 </script>
 <script src="./assets/cmdk.js"></script>
