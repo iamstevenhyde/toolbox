@@ -18,12 +18,11 @@
 <link rel="stylesheet" href="./assets/style.css">
 <style>
 .aboutdoc{max-width:760px;margin:0 auto;padding:6px 0 8px}
-.aboutdoc p{font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;color:var(--ink);margin:0 0 18px}
-.aboutdoc p.lede{font-size:21px;line-height:1.5}
-.aboutdoc h2{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:34px 0 12px}
-.aboutsig{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.5px;color:var(--soft);border-top:1px solid var(--rule);max-width:760px;margin:8px auto 0;padding-top:16px}
-.abouthd{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:26px;line-height:1.15;letter-spacing:-.01em;color:var(--ink);max-width:760px;margin:40px auto 4px}
-.abouthd-sub{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--soft);max-width:760px;margin:0 auto 20px}
+.aboutdoc p{font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;color:var(--bone-dim);margin:0 0 18px}
+.aboutdoc p.lede{font-size:21px;line-height:1.5;color:var(--bone)}
+.aboutdoc a{color:var(--ember)}
+.aboutdoc h2{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ember);margin:34px 0 12px}
+.aboutsig{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.5px;color:var(--bone-faint);border-top:1px solid var(--nrule);max-width:760px;margin:8px auto 0;padding-top:16px}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
@@ -68,10 +67,6 @@
 
     <div class="aboutsig">Steven J. Hyde · Associate Professor of Management · Boise State University. Research from machine-learning measures of executives to how AI is remaking work and the classroom. The tools here are grounded in that work.</div>
   </div>
-
-  <h2 class="abouthd">The work behind it</h2>
-  <div class="abouthd-sub">Published research the tools stand on</div>
-  <div class="pubs" id="pubs"></div>
 </main>
 
 <footer class="site"><div class="sheet"><div class="row">
@@ -80,23 +75,6 @@
 </div></div></footer>
 
 <script src="assets/data.js"></script>
-<script>
-const bench = window.HT.bench||[];
-document.getElementById("pubs").innerHTML = (window.HT.research||[]).filter(p=>!p.rev).map(p=>{
-  const card = bench.find(b=>b.paper===p.id);
-  return `
-  <article class="pub" id="${p.id||''}">
-    <div class="yr">${p.yr}</div>
-    <div>
-      <div class="ti">${p.ti}</div>
-      <div class="au">${p.au}</div>
-      <div class="ar">${p.ar}</div>
-      ${(p.media&&p.media.length)||card?`<div class="media">${(p.media||[]).map(m=>`<span class="${p.award?'award':''}">${m}</span>`).join("")}${card?`<a class="plink" href="./tool.html?id=${card.id}">on the bench →</a>`:''}</div>`:''}
-    </div>
-    <div class="ven">${p.ven}</div>
-  </article>`;}).join("");
-if(location.hash){ const el=document.getElementById(location.hash.slice(1)); if(el) el.scrollIntoView({block:"center"}); }
-</script>
 <script src="./assets/cmdk.js"></script>
 </body>
 </html>
