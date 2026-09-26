@@ -9,6 +9,14 @@ window.HT = {
 
   /* ---------------- THE BENCH ---------------- */
   bench: [
+    {id:"harness", n:"The Harness Starter Kit", k:"Framework", ai:true, cover:"harness.webp", url:"https://github.com/iamstevenhyde/harness-starter-kit",
+     run:{level:"any", prep:"light"},
+     g:"Anthropic's agent patterns, classroom-tested",
+     blurb:"A free starter kit for working with Claude Code the way it is meant to be used. A visual field manual, a project board, a guided onboarding, and a curated set of skills, all built so a student can go from chatting at an AI to actually running it.",
+     purpose:"Students pick up prompting fast, but they stall on everything around the prompt: how to explore before they build, when to clear context, how to hand routine work to cheaper models, and how to keep a long project from falling apart between sessions. The kit teaches that working loop and hands over the tools that make it real. Keep what helps, change what does not.",
+     how:"Point students at the repo. They open the field manual, run the onboarding command, and graph a folder of their own work in the first hour. From there the loop, explore then plan then clear then execute then repeat, becomes the habit.",
+     note:"Grounded in Anthropic's published agent patterns and the way these tools have been used across two years of strategy courses. The install is a curated, scrubbed set of skills plus a board and a wiki starter, and every piece is optional.",
+     materials:[{l:"The field manual",k:"guide",u:"https://github.com/iamstevenhyde/harness-starter-kit/blob/main/manual/index.html"},{l:"One-page cheat sheet",k:"handout",u:"https://github.com/iamstevenhyde/harness-starter-kit/blob/main/manual/cheatsheet.html"},{l:"GitHub repo",k:"repo",u:"https://github.com/iamstevenhyde/harness-starter-kit"}]},
     {id:"4ps", n:"The 4Ps of AI Partnership", k:"Framework", ai:true, cover:"4ps.webp", paper:"tools-or-fools",
      run:{time:"whole class", size:"teams", prep:"light"},
      g:'"Tools or Fools," JME 2024 (framework lineage)',
