@@ -235,6 +235,36 @@ window.HT = {
      materials:[
        {l:"The Bull Market, play the live game",k:"game",u:"https://iamstevenhyde.github.io/ranch-game/"}
      ]},
+    {id:"better-off", n:"Better Off: Open Deals", k:"Simulation", ai:true, cover:"better-off.webp",
+     url:"https://iamstevenhyde.github.io/better-off/",
+     run:{time:"~75 min (25-min deal round + debrief)", level:"MBA", size:"class of 17 firms, solo or pairs", platform:"Web app + instructor laptop (AI reader)", prep:"instructor laptop running the AI reader during class"},
+     g:"the hold-up problem (Williamson, 1979), information asymmetry, and Diplomacy-style secret orders",
+     blurb:"One 25-minute round, 17 cannabis firms in a supply chain, and deals written in plain English that an AI reader turns into terms both sides confirm. Then every firm secretly decides whether to honor or break what it signed.",
+     purpose:"Negotiation is easy to describe and hard to feel until a deal you talked your way into costs you at the end. Each student runs one firm, a grower, a processor, or a retailer, with a fallback price and a few private facts nobody else in the room fully holds. They spend 25 minutes trading, chaining crops into products into shelf space, and pricing what a fact or a favor is worth before they say it out loud. Then, Diplomacy-style, every firm privately chooses to honor or break each deal it signed, and the room finds out together what its word turned out to be worth.",
+     framework:"Williamson's hold-up problem made concrete: a signed deal is not a finished deal, because breaking one costs only the penalty written into it, so a weak penalty is an invitation. Information asymmetry runs through 23 hidden combos, recipes, blends, and menus, each split into fact fragments held by firms outside the deal, so nobody holds a full picture and facts become something to sell, trade, or give away by talking too soon. Every firm's score is its gain over its own fallback (the price it could always get from an AI buyer), which keeps the better-off test literal instead of rhetorical, and tier winners (best grower, best processor, best retailer) keep one dominant position from running away with the whole game.",
+     steps:[
+       "Pitch (4 min): each student runs one firm and trades at a fixed AI fallback price on their own; the score is the gain above that fallback. Put the join code on the projector.",
+       "Claim and seat (5 min): students open the start page, join with the code, and claim a firm. Seat growers, processors, and retailers in three visible blocks.",
+       "Read your card (3 min): silent read of the firm's fallback, its fit with other firms, and its private facts. State that facts are free once said out loud.",
+       "Demo a deal (3 min): write one deal live on the projector with sliders alone (signs instantly), then a second with free text so the room sees the AI reader's summary and both sides confirming. State the secret-orders rule before deals open.",
+       "Deals (25 min): open the deal clock. Students write deals (sell, three-way chain, sell a fact, profit pool), the AI reader turns free text into terms, both sides confirm, and a grower's unsold crop loses value as the round runs.",
+       "Secret orders (4 min): close deals and open the orders phase. Every firm privately decides, deal by deal, whether to honor it or break it and eat the penalty.",
+       "Reveal: resolve the ledger and show the chain map, tier winners, and room value against the goal.",
+       "Debrief (25 min) and a three-line exit ticket: the deal worth making, the deal that didn't happen, and one thing they'd own outright next time instead of contracting for."
+     ],
+     debrief:[
+       "What did the room leave on the table? Which chain was never built, and was that because nobody knew about it, nobody trusted it, or nobody could agree on a price?",
+       "Who broke a deal, and why? What did the penalty protect, or fail to protect, for the firm on the other side?",
+       "Pick the biggest delivery in the room: would that seller walk for a 40% better outside offer, and what would the buyer pay to keep them, or would the buyer rather have owned the supplier outright?",
+       "What was a private fact worth before you said it out loud, and what was it worth after?",
+       "For the best chain in the room, did every firm in it finish better off than its fallback, or did one firm take most of the value?",
+       "Who made the most, and was that position (processors sit in the middle of every chain) or skill?"
+     ],
+     how:"A live web app: students join from a browser with a code and write deals in plain English with sliders for partner, amount, price, and penalty. An AI reader (running on the instructor's laptop during class, on a Python script that watches every active game) turns the free text into structured terms that both sides confirm before a deal counts. The hosted version's Supabase backend is already configured; the only live requirement is the instructor's laptop keeping the reader running through the deal round. One round, no do-over: 17 firms, 25 minutes of deals, a secret orders phase, then reveal.",
+     note:"Built for MBA 546's negotiation week as the one-round successor to an earlier multi-year dispensary build-out version of the same cannabis supply chain. Student deals, team identities, and game outcomes from any specific class session are not published here (FERPA); this card describes the design and how to run it, not a particular night's results.",
+     materials:[
+       {l:"Better Off: Open Deals, play the live game",k:"game",u:"https://iamstevenhyde.github.io/better-off/"}
+     ]},
     {id:"resume-bias", n:"Resume Bias Lab", k:"Exercise", ai:true, cover:"resume-bias.webp",
      run:{level:"MBA", prep:"light"},
      g:"202 real resumes",
