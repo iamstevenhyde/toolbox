@@ -14,16 +14,17 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="./assets/hyde-tokens.css">
 <link rel="stylesheet" href="./assets/style.css">
-<style>
-.lit-badge{position:absolute;bottom:18px;right:18px;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;background:var(--teal);color:var(--bone);padding:4px 9px;border-radius:2px;pointer-events:none}
-</style>
+
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body class="wall">
+<a class="skip" href="#grid">Skip to the tools</a>
 <div class="topstrip"></div>
 <header class="site"><div class="sheet">
   <div class="topbar">
@@ -33,7 +34,7 @@
       <a href="./chapters.html">Chapters</a>
       <a href="./cases.html">Cases</a>
       <a href="./about.html">About</a>
-      <a href="./submit.html">Submit</a>
+      <a href="./submit.html" class="nav-cta">Submit / Request</a>
     </nav>
     <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
     <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
@@ -46,24 +47,24 @@
   <p class="manifesto">Exercises, custom GPTs, and live cases, classroom-tested with real students. Every one is grounded in something real. <em>Take what is useful.</em></p>
   <div class="herodex">
     <a href="#bench"><b>The Bench</b><span>The tools themselves. Bots, simulations, live cases, exercises, and frameworks, each with a full instructor kit.</span></a>
-    <a href="./chapters.html"><b>The Ledger</b><span>Courses run without a textbook. Each week is a NotebookLM of the foundational sources.</span></a>
-    <a href="./cases.html"><b>The Shelf</b><span>Teaching cases, published and in review, each built on something that actually happened.</span></a>
+    <a href="./chapters.html"><b>Chapters</b><span>Courses run without a textbook. Each week is a NotebookLM of the foundational sources.</span></a>
+    <a href="./cases.html"><b>Cases</b><span>Teaching cases, published and in review, each built on something that actually happened.</span></a>
     <a href="./about.html"><b>About</b><span>What the Toolbox is, the make-and-share model behind it, and the work it stands on.</span></a>
   </div>
   <svg class="heromark" viewBox="0 0 100 100" aria-hidden="true"><use href="#tbmark"/></svg>
 </div></section>
 
 <section class="shelf" id="bench"><div class="sheet">
-  <div class="benchkick">The Bench</div>
-  <div class="chips" id="chips"></div>
+  <h2 class="benchkick">The Bench</h2>
+  <div class="chips" id="chips" role="group" aria-label="Kind of tool"></div>
   <div class="chips chips2" id="chips2"></div>
   <div class="count" id="count"></div>
 </div></section>
 
-<main class="sheet"><div class="gallery" id="grid"></div></main>
+<main class="sheet" id="main"><div class="gallery" id="grid"></div></main>
 
 <section class="shelf" id="ask"><div class="sheet" style="padding-top:34px;padding-bottom:44px">
-  <div class="benchkick">The inbox</div>
+  <h2 class="benchkick">The inbox</h2>
   <p style="max-width:58ch;font-size:17px;line-height:1.6;margin:0 0 24px">Missing something? Send an idea, ask for one of these adapted to your course, or put a tool of your own on the bench. Everything that comes in gets read.</p>
   <a class="btn primary" href="./submit.html#ask">send an idea</a>
   <a class="btn" href="./submit.html" style="margin-left:12px">submit a tool</a>
@@ -89,42 +90,65 @@ const ORDER = (() => {
 })();
 const KINDS = ["All", ...[...new Set(B.map(x=>x.k))], "AI-built", "From the literature"];
 const PLATS = ["Any platform", ...[...new Set(B.map(x=>x.run&&x.run.platform).filter(Boolean))]];
-let active = "All", plat = "Any platform";
+// Class time: bucketed from run.time (only items that have it). Items without a
+// recognizable time appear under "Any length" only.
+const TIMES = ["Any length", "Under 30 min", "30 to 60 min", "Over 60 min or a full class", "Several sessions"];
+function timeBucket(t){
+  if(!t) return null;
+  const s = String(t).toLowerCase();
+  if(/week|term|session[s]?\b.*|module/.test(s) && !/one class session/.test(s) && !/\bmin\b/.test(s)) return "Several sessions";
+  if(/one class session|full class|whole class/.test(s)) return "Over 60 min or a full class";
+  if(/drop-in/.test(s)) return "Under 30 min";
+  const m = s.match(/(\d+)\s*(?:-|to)?\s*(\d+)?\s*min/);
+  if(m){ const hi = +(m[2]||m[1]); return hi<=30 ? "Under 30 min" : hi<=60 ? "30 to 60 min" : "Over 60 min or a full class"; }
+  return null;
+}
+const hasKit = x => !!(x.purpose || (x.steps&&x.steps.length) || (x.debrief&&x.debrief.length));
+let active = "All", plat = "Any platform", ctime = "Any length";
 const chips = document.getElementById("chips");
-chips.innerHTML = KINDS.map(k=>`<span class="${k==='All'?'on':''}" data-k="${k}">${k}</span>`).join("");
 const chips2 = document.getElementById("chips2");
-chips2.innerHTML = PLATS.map(p=>`<span class="${p==='Any platform'?'on':''}" data-p="${p}">${p}</span>`).join("");
+const btn = (attr, v, on) => `<button type="button" data-${attr}="${v}" aria-pressed="${on}">${v}</button>`;
+chips.innerHTML = KINDS.map(k=>btn("k",k,k==="All")).join("");
+chips2.innerHTML = `<label class="ctime">Platform <select id="plat">${PLATS.map(p=>`<option>${p}</option>`).join("")}</select></label>` +
+  `<label class="ctime">Class time <select id="ctime">${TIMES.map(t=>`<option>${t}</option>`).join("")}</select></label>`;
 function match(x){
   const kOk = active==="All" || (active==="AI-built" ? x.ai : active==="From the literature" ? x.lit : x.k===active);
   const pOk = plat==="Any platform" || (x.run && x.run.platform===plat);
-  return kOk && pOk;
+  const tOk = ctime==="Any length" || timeBucket(x.run && x.run.time)===ctime;
+  return kOk && pOk && tOk;
 }
 function render(){
   const out = ORDER.filter(match);
-  const filtering = active !== "All" || plat !== "Any platform";
-  document.getElementById("count").textContent = filtering ? `${out.length} of ${B.length}` : "a working wall of classroom tools";
+  const filtering = active !== "All" || plat !== "Any platform" || ctime !== "Any length";
+  document.getElementById("count").textContent = filtering ? `${out.length} of ${B.length} tools` : `${B.length} tools`;
   const g = document.getElementById("grid");
   g.innerHTML = out.length ? out.map(x=>{
     const no = String(ORDER.indexOf(x)+1).padStart(2,"0");
+    const time = x.run && x.run.time;
     return `
-    <a class="painting" href="./tool.html?id=${x.id}">
-      <div class="frame">
-        <span class="cover" role="img" aria-label="${x.n} cover" style="background-image:url('assets/img/covers/${x.cover}')"></span>
-        <span class="tags"><span class="k">${x.k}</span>${x.ai?'<span class="ai">AI</span>':''}</span>
-        ${x.lit?'<span class="lit-badge">Literature</span>':''}
-      </div>
-      <span class="placard">
-        <span class="no">No. ${no}</span>
-        <span class="ct" style="display:block">${x.n}</span>
-        <span class="cg" style="display:block">${x.g}</span>
-      </span>
-    </a>`;}).join("") : `<div class="empty">Nothing hangs here. Clear the filter.</div>`;
+    <article class="painting">
+      <a class="pl" href="./tool.html?id=${x.id}">
+        <div class="frame">
+          <span class="cover" role="img" aria-label="${x.n} cover" style="background-image:url('assets/img/covers/${x.cover}')"></span>
+          <span class="tags"><span class="k">${x.k}</span>${x.ai?'<span class="ai">AI</span>':''}</span>
+        </div>
+        <span class="placard">
+          <span class="no">No. ${no}${x.lit?' · From the literature':''}</span>
+          <span class="ct" style="display:block">${x.n}</span>
+          <span class="cg" style="display:block">${x.g}</span>
+        </span>
+      </a>
+      <div class="pmeta"><span>${x.k}${time?` · ${time}`:''}</span>${hasKit(x)?`<a class="kit" href="./tool.html?id=${x.id}#kit">View teaching kit ↗</a>`:''}</div>
+    </article>`;}).join("") : `<div class="empty">No tools match these filters. Choose Any length, Any platform or All to widen the list.</div>`;
   window.HTreveal && HTreveal(".painting");
 }
-chips.addEventListener("click", e=>{ const s=e.target.closest("span[data-k]"); if(!s) return;
-  active=s.dataset.k; [...chips.children].forEach(c=>c.classList.toggle("on",c.dataset.k===active)); render(); });
-chips2.addEventListener("click", e=>{ const s=e.target.closest("span[data-p]"); if(!s) return;
-  plat=s.dataset.p; [...chips2.children].forEach(c=>c.classList.toggle("on",c.dataset.p===plat)); render(); });
+function bind(box, attr, set){
+  box.addEventListener("click", e=>{ const b=e.target.closest("button[data-"+attr+"]"); if(!b) return;
+    set(b.dataset[attr]); [...box.querySelectorAll("button[data-"+attr+"]")].forEach(c=>c.setAttribute("aria-pressed", String(c===b))); render(); });
+}
+bind(chips, "k", v=>active=v);
+document.getElementById("plat").addEventListener("change", e=>{ plat=e.target.value; render(); });
+document.getElementById("ctime").addEventListener("change", e=>{ ctime=e.target.value; render(); });
 render();
 </script>
 <script src="./assets/cmdk.js"></script>

@@ -14,18 +14,20 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="./assets/hyde-tokens.css">
 <link rel="stylesheet" href="./assets/style.css">
 <style>
-.src-block{margin:18px 0 0;padding:14px 16px;border-left:3px solid var(--teal);background:rgba(44,74,71,.12);max-width:52ch}
-.src-block .src-label{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal-lt);display:block;margin-bottom:6px}
-.src-block .src-cite{font-size:14px;color:var(--bone-dim);line-height:1.55}
-.src-block .src-doi{display:inline-block;margin-top:7px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.5px;color:var(--teal-lt);border-bottom:1px solid var(--teal-lt)}
-.src-block .src-doi:hover{color:var(--ember);border-color:var(--ember)}
-.series-strip{margin-bottom:20px;font-size:14px;color:var(--soft)}
-.series-strip .series-label{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--verm);margin-right:8px}
-.series-strip a{color:var(--verm);border-bottom:1px dotted var(--verm)}
-.series-strip a:hover{color:var(--ink);border-color:var(--ink)}
+.src-block{margin:18px 0 0;padding:14px 16px;border-left:3px solid var(--teal);background:var(--surface);max-width:52ch}
+.src-block .src-label{font-size:16px;font-weight:700;color:var(--text);display:block;margin-bottom:6px}
+.src-block .src-cite{font-size:16px;color:var(--muted);line-height:1.55}
+.src-block .src-doi{display:inline-block;margin-top:7px;font-family:var(--mono);font-size:16px;color:var(--teal);border-bottom:1px solid var(--teal);overflow-wrap:anywhere}
+.src-block .src-doi:hover{color:var(--text)}
+.series-strip{margin-bottom:20px;font-size:17px;color:var(--muted)}
+.series-strip .series-label{font-weight:700;color:var(--text);margin-right:8px}
+.series-strip a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.series-strip a:hover{color:var(--text)}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
@@ -40,14 +42,14 @@
       <a href="./chapters.html">Chapters</a>
       <a href="./cases.html">Cases</a>
       <a href="./about.html">About</a>
-      <a href="./submit.html">Submit</a>
+      <a href="./submit.html" class="nav-cta">Submit / Request</a>
     </nav>
     <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
     <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
   </div>
 </div></header>
 
-<div class="sheet"><a class="back" href="./index.html">← back to the bench</a></div>
+<div class="sheet"><a class="back" href="./index.html">← Back to The Bench</a></div>
 <div id="hang"></div>
 <div id="sheetzone"></div>
 
@@ -90,7 +92,7 @@ if(!t){
       </div>
     </div>
   </div></div>`;
-  zone.innerHTML = `<div class="paperzone"><div class="sheet"><div class="dsheet"><div class="cols">
+  zone.innerHTML = `<div class="paperzone" id="kit"><div class="sheet"><div class="dsheet"><div class="cols">
     <div>
       ${seriesStrip}
       <p class="dblurb">${t.blurb}</p>

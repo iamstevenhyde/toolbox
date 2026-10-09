@@ -14,15 +14,17 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="./assets/hyde-tokens.css">
 <link rel="stylesheet" href="./assets/style.css">
 <style>
 .aboutdoc{max-width:760px;margin:0 auto;padding:6px 0 8px}
-.aboutdoc p{font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;color:var(--bone-dim);margin:0 0 18px}
-.aboutdoc p.lede{font-size:21px;line-height:1.5;color:var(--bone)}
-.aboutdoc a{color:var(--ember)}
-.aboutdoc h2{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ember);margin:34px 0 12px}
-.aboutsig{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.5px;color:var(--bone-faint);border-top:1px solid var(--nrule);max-width:760px;margin:8px auto 0;padding-top:16px}
+.aboutdoc p{font-family:var(--sans);font-size:18px;line-height:1.62;color:var(--muted);margin:0 0 18px}
+.aboutdoc p.lede{font-size:21px;line-height:1.5;color:var(--text)}
+.aboutdoc a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.aboutdoc h2{font-family:var(--sans);font-size:20px;font-weight:700;color:var(--text);margin:34px 0 12px}
+.aboutsig{font-family:var(--sans);font-size:16px;color:var(--muted);border-top:1px solid var(--line);max-width:760px;margin:8px auto 0;padding-top:16px}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
@@ -38,7 +40,7 @@
       <a href="./chapters.html">Chapters</a>
       <a href="./cases.html">Cases</a>
       <a href="./about.html" class="on">About</a>
-      <a href="./submit.html">Submit</a>
+      <a href="./submit.html" class="nav-cta">Submit / Request</a>
     </nav>
     <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
     <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
