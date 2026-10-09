@@ -1,0 +1,23 @@
+/* Hyde shared design tokens (2026-10-09). Source of truth: docs/design-language-brief.md.
+   Mirrors the token block in reins-preview.html. Inlined into the Board by update_the_board.py;
+   a copy sits next to the generator in ~/.claude/tools/ as a fallback. */
+:root{
+  --bg:#1a1c1e; --surface:#232628; --surface-2:#2a2d30; --line:#43484d; --edge:#808890;
+  --text:#f0efec; --muted:#b9bdc1;
+  --action:#e0702f; --on-action:#1a1c1e;
+  --teal:#5cc0b2;
+  --ok:#7dd69b; --warn:#f0c75e; --bad:#ff9b92; --run:#96bdff;
+  --focus:#9fd0ff;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Atkinson Hyperlegible",Verdana,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",Consolas,monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px;
+}
+[data-theme="light"]{
+  --bg:#f3f4f5; --surface:#ffffff; --surface-2:#eceeef; --line:#c4c9cd; --edge:#767d83;
+  --text:#1b1e20; --muted:#52595e;
+  --action:#b8470c; --on-action:#ffffff;
+  --teal:#0b6a62;
+  --ok:#176a35; --warn:#7a5600; --bad:#a5281f; --run:#1f4fb5;
+  --focus:#1a5fd0;
+}

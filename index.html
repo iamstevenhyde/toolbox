@@ -8,7 +8,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Toolbox">
 <meta property="og:description" content="Classroom-tested AI activities, bots, simulations, and live cases. Take what is useful.">
-<meta property="og:image" content="../assets/img/toolbox-logo-lockup.png"><!-- set absolute URL at deploy -->
+<meta property="og:image" content="https://iamstevenhyde.github.io/toolbox/assets/img/toolbox-logo-lockup.png">
+<meta property="og:url" content="https://iamstevenhyde.github.io/toolbox/">
+<link rel="canonical" href="https://iamstevenhyde.github.io/toolbox/">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,9 +19,9 @@
 <link rel="stylesheet" href="./assets/hyde-tokens.css">
 <link rel="stylesheet" href="./assets/style.css">
 
-<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
-<link rel="apple-touch-icon" href="../assets/img/favicon-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body class="wall">
 <a class="skip" href="#grid">Skip to the tools</a>
@@ -74,7 +76,7 @@
   <span>Grounded in reality</span>
 </div></div></footer>
 
-<script src="../assets/data.js"></script>
+<script src="assets/data.js"></script>
 <script>
 const B = window.HT.bench;
 // Stable display order: weave the "from the literature" tools through the rest
@@ -127,7 +129,7 @@ function render(){
     <article class="painting">
       <a class="pl" href="./tool.html?id=${x.id}">
         <div class="frame">
-          <span class="cover" role="img" aria-label="${x.n} cover" style="background-image:url('../assets/img/covers/${x.cover}')"></span>
+          <span class="cover" role="img" aria-label="${x.n} cover" style="background-image:url('assets/img/covers/${x.cover}')"></span>
           <span class="tags"><span class="k">${x.k}</span>${x.ai?'<span class="ai">AI</span>':''}</span>
         </div>
         <span class="placard">

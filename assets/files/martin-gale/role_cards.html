@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martin Gale: AI Corp Role Cards</title>
+<style>
+  /* ---- Reset & Base ---- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f4f5f7;
+    color: #1a1a2e;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  a { color: #1d5fa6; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---- Page Header ---- */
+  .page-header {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .page-header p {
+    margin-top: 0.5rem;
+    color: #a8b4c8;
+    font-size: 0.95rem;
+  }
+
+  /* ---- Table of Contents ---- */
+  .toc {
+    background: #fff;
+    border-bottom: 1px solid #dde1e9;
+    padding: 1.75rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .toc h2 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #7a8499;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.4rem 1.5rem;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    font-size: 0.9rem;
+  }
+  .toc-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 22px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0;
+  }
+  .badge-pitch { background: #dbeafe; color: #1d4ed8; }
+  .badge-stake { background: #fff3e0; color: #c05000; }
+  .badge-guide { background: #e8f5e9; color: #2e7d32; }
+  .toc-item a { color: #1a1a2e; font-weight: 500; }
+  .toc-item a:hover { color: #1d5fa6; }
+
+  /* ---- Main Content ---- */
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* ---- Card ---- */
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.05);
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+
+  /* ---- Card Header ---- */
+  .card-header {
+    padding: 1.5rem 2rem 1.25rem;
+    border-bottom: 3px solid transparent;
+    position: relative;
+  }
+  .card-header.pitch { border-bottom-color: #2563eb; background: linear-gradient(135deg, #eff6ff 0%, #fff 60%); }
+  .card-header.stake { border-bottom-color: #d97706; background: linear-gradient(135deg, #fffbf0 0%, #fff 60%); }
+  .card-header.guide { border-bottom-color: #16a34a; background: linear-gradient(135deg, #f0fdf4 0%, #fff 60%); }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .face-card {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+  .face-card.pitch { color: #1d4ed8; }
+  .face-card.stake { color: #b45309; }
+  .face-card.guide { color: #15803d; }
+
+  .role-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+  }
+  .role-pill.pitch { background: #dbeafe; color: #1d4ed8; }
+  .role-pill.stake { background: #fde68a; color: #92400e; }
+  .role-pill.guide { background: #bbf7d0; color: #14532d; }
+
+  .card-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.35rem;
+  }
+  .card-tagline {
+    font-size: 0.95rem;
+    color: #4b5563;
+    font-style: italic;
+    font-weight: 500;
+    border-left: 3px solid #cbd5e1;
+    padding-left: 0.8rem;
+    margin-top: 0.4rem;
+  }
+  .card-tagline.pitch { border-left-color: #93c5fd; }
+  .card-tagline.stake { border-left-color: #fcd34d; }
+  .card-tagline.guide { border-left-color: #6ee7b7; }
+
+  /* ---- Card Body ---- */
+  .card-body {
+    padding: 1.5rem 2rem;
+  }
+
+  /* ---- Sections ---- */
+  .section {
+    margin-bottom: 1.75rem;
+  }
+  .section:last-child { margin-bottom: 0; }
+
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #9ca3af;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .section p {
+    color: #374151;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+  }
+  .section p:last-child { margin-bottom: 0; }
+
+  .section ul, .section ol {
+    padding-left: 1.4rem;
+    margin-top: 0.3rem;
+  }
+  .section li {
+    color: #374151;
+    margin-bottom: 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .section li strong { color: #1a1a2e; }
+
+  /* ---- Callout boxes ---- */
+  .callout {
+    border-radius: 7px;
+    padding: 1rem 1.25rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .callout.pitch { background: #eff6ff; border-left: 4px solid #3b82f6; }
+  .callout.stake { background: #fffbeb; border-left: 4px solid #f59e0b; }
+  .callout.guide { background: #f0fdf4; border-left: 4px solid #22c55e; }
+  .callout p { color: #374151; margin-bottom: 0.4rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout strong { color: #1a1a2e; }
+
+  /* Deliverable highlight */
+  .deliverable-box {
+    border-radius: 7px;
+    padding: 1rem 1.25rem;
+    margin-top: 0.5rem;
+    font-size: 0.92rem;
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+  }
+  .deliverable-box p { color: #374151; margin-bottom: 0.4rem; }
+  .deliverable-box p:last-child { margin-bottom: 0; }
+
+  /* Questions list */
+  .questions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .questions-list li {
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    background: #f8fafc;
+    border-left: 3px solid #94a3b8;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #374151;
+    font-style: italic;
+  }
+  .questions-list li.pitch-q { border-left-color: #60a5fa; }
+  .questions-list li.stake-q { border-left-color: #fbbf24; }
+
+  /* ---- Two-column layout for some sections ---- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 620px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Guide card special styling ---- */
+  .step-block {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+  }
+  .step-content { flex: 1; }
+  .step-content strong { display: block; font-size: 0.92rem; color: #1a1a2e; margin-bottom: 0.2rem; }
+  .step-content p { font-size: 0.9rem; color: #374151; margin: 0; }
+
+  /* ---- Divider ---- */
+  .card-divider {
+    height: 1px;
+    background: #f1f5f9;
+    margin: 1.5rem 0;
+  }
+
+  /* ---- Print styles ---- */
+  @media print {
+    body { background: #fff; font-size: 14px; }
+    .page-header, .toc { display: block; }
+    .toc { border: none; box-shadow: none; }
+    .card {
+      box-shadow: none;
+      border: 1px solid #ddd;
+      page-break-before: always;
+      break-before: page;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .card:first-child { page-break-before: auto; break-before: auto; }
+    .page-header { page-break-after: avoid; break-after: avoid; }
+    a { color: inherit; }
+    .callout, .deliverable-box { border: 1px solid #ddd; }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 640px) {
+    .page-header { padding: 1.75rem 1rem 1.25rem; }
+    .page-header h1 { font-size: 1.4rem; }
+    .toc { padding: 1.25rem 1rem; }
+    .content { padding: 1rem 0.75rem 3rem; }
+    .card-header { padding: 1.25rem 1.25rem 1rem; }
+    .card-header h2 { font-size: 1.25rem; }
+    .card-body { padding: 1.25rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== PAGE HEADER ======== -->
+<div class="page-header">
+  <h1>Martin Gale: AI Corp Role Cards</h1>
+  <p>BUS 450 &mdash; Competing Consulting Firms Exercise &mdash; Spring 2026</p>
+</div>
+
+<!-- ======== TABLE OF CONTENTS ======== -->
+<nav class="toc" aria-label="Table of contents">
+  <h2>Jump to Card</h2>
+  <div class="toc-grid">
+
+    <div class="toc-item">
+      <span class="toc-badge badge-pitch">K&#9824;</span>
+      <a href="#apex">Apex Strategy Group</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-pitch">K&#9829;</span>
+      <a href="#ridgeline">Ridgeline Capital Advisors</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-pitch">K&#9827;</span>
+      <a href="#ironbridge">Ironbridge Supply Chain Solutions</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">Q&#9824;</span>
+      <a href="#thornfield">Thornfield Equity Partners</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">Q&#9829;</span>
+      <a href="#allied">Allied Workforce Coalition</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">Q&#9827;</span>
+      <a href="#meridian">Meridian Credit Advisory</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">Q&#9830;</span>
+      <a href="#greenmark">GreenMark Sustainability Institute</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">J&#9830;</span>
+      <a href="#blackthorn">Blackthorn M&amp;A Partners</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">J&#9829;</span>
+      <a href="#larkwell">Larkwell &amp; Associates</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-stake">J&#9827;</span>
+      <a href="#slate">Slate Business Journal</a>
+    </div>
+    <div class="toc-item">
+      <span class="toc-badge badge-guide">&#9733;</span>
+      <a href="#guide">Pitching Team Guide (K&#9824; K&#9829; K&#9827;)</a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ======== MAIN CONTENT ======== -->
+<main class="content">
+
+
+<!-- ================================================ -->
+<!-- CARD 01: APEX STRATEGY GROUP  K♠  pitching       -->
+<!-- ================================================ -->
+<article class="card" id="apex">
+  <div class="card-header pitch">
+    <div class="card-meta">
+      <span class="face-card pitch">K&#9824;</span>
+      <span class="role-pill pitch">Pitching Firm</span>
+    </div>
+    <h2>Apex Strategy Group</h2>
+    <p class="card-tagline pitch">Full-Service Management Consultancy &mdash; "We build strategies that hold up under fire."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are a senior engagement team at Apex Strategy Group, a full-service management consultancy with a track record across retail, apparel, and consumer goods. You were hired directly by CEO Bob Buckwalter to design AI Corp's turnaround strategy. This is your account. Your partners are watching.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>Your firm's reputation rides on this. If your strategy fails, Buckwalter doesn't call you for the next engagement &mdash; and neither does anyone else who reads the press coverage. You need a plan that is both defensible under scrutiny and operationally executable. Incomplete thinking is a career event.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li>A comprehensive, phased turnaround strategy that actually bridges to the $300M cost target</li>
+        <li>Clear portfolio logic: which brands get capital, which get sold, which get harvested</li>
+        <li>Corporate center cost reduction &mdash; the overhead bloat is the most visible failure here</li>
+        <li>Implementation sequence that doesn't blow up the business while saving it</li>
+        <li>A credible story for the CEO when the stakeholders push back</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Income statement:</strong> Trace SG&amp;A as a percentage of revenue over the last four years. The trend is the problem.</li>
+        <li><strong>Brand portfolio document:</strong> Map each brand &mdash; growth rate, strategic fit, divestiture status, and size. Build a keep/sell/invest matrix.</li>
+        <li><strong>Financial ratios:</strong> Look at EBITDA margin trajectory. Where has profitability eroded and when did it start?</li>
+        <li><strong>CFO bot (Martin Hughes):</strong> Ask directly about corporate center overhead growth. Ask him to explain the logic behind the biggest acquisition. Notice whether his answers are clear or evasive.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Research how successful apparel turnarounds have structured cost reduction phases (Levi's, Ralph Lauren, and others have public restructuring histories). What sequencing actually worked?</li>
+        <li>What is a realistic timeline for SG&amp;A reduction at a company operating across 12 brands and multiple geographies? Benchmarks matter when a skeptical activist investor is in the room.</li>
+      </ul>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">Your Pitch (3 minutes)</div>
+      <div class="callout pitch">
+        <p>You present <strong>first</strong>. You set the tone for the room. Two other firms pitch after you &mdash; a restructuring specialist and a supply chain consultancy &mdash; so expect your strategy to be compared directly to theirs. Three minutes is tight. Be decisive, not comprehensive.</p>
+        <ul style="margin-top:0.5rem; padding-left:1.3rem;">
+          <li>Lead with the $300M bridge: break it down by lever, not as a lump sum</li>
+          <li>State your position on the biggest portfolio decisions explicitly &mdash; no hedging</li>
+          <li>Explain your implementation sequence and why you chose it</li>
+          <li>Anticipate the credit, labor, and operations pushback before the room raises it</li>
+        </ul>
+        <p style="margin-top:0.6rem;">After your pitch, the CEO will ask one hard question. Then the stakeholder teams respond.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>Your pitch is your deliverable. After the session, also write one paragraph: <strong>What the other two firms got right that you missed, or got wrong that you caught.</strong> Turned in at the end of class.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 02: RIDGELINE CAPITAL ADVISORS  K♥  pitching -->
+<!-- ================================================ -->
+<article class="card" id="ridgeline">
+  <div class="card-header pitch">
+    <div class="card-meta">
+      <span class="face-card pitch">K&#9829;</span>
+      <span class="role-pill pitch">Pitching Firm</span>
+    </div>
+    <h2>Ridgeline Capital Advisors</h2>
+    <p class="card-tagline pitch">Restructuring and Turnaround Specialists &mdash; "We come in when it gets serious."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are a specialist restructuring firm. You are not called for routine strategy engagements &mdash; you are called when a company is in genuine financial distress and the normal consultants haven't been able to fix it. Buckwalter brought you in because the balance sheet situation is worse than it looks from the outside. You know how these stories end if the debt doesn't get controlled.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>Your track record is built on distressed turnarounds. If you miss the severity of the situation and recommend half-measures, the company ends up in a worse position &mdash; and your firm gets blamed. You need a plan that genuinely addresses the leverage problem, not one that just delays it.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li>Getting debt to a sustainable level through a credible, time-bound path</li>
+        <li>Asset sales: what can be sold, for how much, and how fast the proceeds hit the balance sheet</li>
+        <li>Cash flow stabilization before any significant reinvestment</li>
+        <li>Covenant compliance: understand exactly where the thresholds are and how much headroom exists</li>
+        <li>Avoiding a liquidity crunch in year one while the savings plan is still ramping</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Balance sheet:</strong> Track how total debt has changed since fiscal year 2019. Map both long-term debt and short-term borrowings separately &mdash; the recent spike in short-term is a warning sign.</li>
+        <li><strong>Financial ratios:</strong> Focus on leverage (debt/EBITDA), interest coverage (EBIT/interest), and the Altman Z-Score trajectory. Where is the company relative to distress thresholds?</li>
+        <li><strong>CFO bot (Martin Hughes):</strong> Ask what the debt covenants actually require. Ask what happens if EBITDA continues to decline. Ask whether the current dividend is sustainable given earnings.</li>
+        <li><strong>Income statement:</strong> Look at how interest expense has grown over the last four years relative to operating income.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Research what leverage ratios typically trigger covenant breaches or credit rating downgrades in the consumer goods and apparel sector. What do Moody's and S&amp;P use as thresholds for investment-grade vs. speculative-grade ratings?</li>
+        <li>What do distressed companies at similar leverage levels typically do first &mdash; asset sales, dividend cuts, debt refinancing, or operational cuts? Is there a standard sequencing that creditors prefer?</li>
+      </ul>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">Your Pitch (3 minutes)</div>
+      <div class="callout pitch">
+        <p>You present <strong>second</strong>, after Apex Strategy Group. You have heard their broad strategy pitch. Now make the case that financial restructuring is the real priority &mdash; not just one piece of the plan, but the thing that has to happen first or nothing else matters. Three minutes is tight. Lead with the most important number in the case.</p>
+        <ul style="margin-top:0.5rem; padding-left:1.3rem;">
+          <li>Lead with the debt trajectory and what happens if nothing changes</li>
+          <li>Identify which assets generate the fastest deleveraging if sold</li>
+          <li>Explain how the $300M cost target interacts with debt reduction &mdash; are they complementary or in tension?</li>
+          <li>Be prepared to answer: "What is the leverage ratio at end of year two under your plan?"</li>
+        </ul>
+        <p style="margin-top:0.6rem;">A third firm (supply chain specialists) pitches after you with a compressed operations-focused rebuttal. Expect your financial plan to be challenged on operational feasibility.</p>
+        <p>After your pitch, the CEO will ask one hard question. Then the stakeholder teams respond.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>Your pitch is your deliverable. After the session, also write one paragraph: <strong>What the other two firms got right that you missed, or got wrong that you caught.</strong> Turned in at the end of class.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 06: IRONBRIDGE SUPPLY CHAIN  K♣  pitching   -->
+<!-- ================================================ -->
+<article class="card" id="ironbridge">
+  <div class="card-header pitch">
+    <div class="card-meta">
+      <span class="face-card pitch">K&#9827;</span>
+      <span class="role-pill pitch">Pitching Firm</span>
+    </div>
+    <h2>Ironbridge Supply Chain Solutions</h2>
+    <p class="card-tagline pitch">"We know where your inventory is hiding &mdash; and why it's killing you."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are a boutique operations and logistics consultancy with deep expertise in apparel and retail supply chains. Your clients bring you in when something is visibly wrong with inventory, manufacturing, or distribution &mdash; and when nobody else can explain where the costs are actually coming from. You have seen this movie before. You know the signs.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>CEO Bob Buckwalter hired you because the other two consulting firms keep talking about strategy and financial engineering, but nobody has looked under the hood. You believe the operational problems are the binding constraint &mdash; nothing else works until the supply chain, inventory, and systems are fixed. You are here to make that case.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li><strong>Inventory velocity.</strong> Finished goods sitting unsold represent cash that cannot be used to pay down debt. How long has inventory been building, and why?</li>
+        <li><strong>Distribution infrastructure.</strong> Is the DC network configured for where the business is going, or where it used to be? DTC growth and wholesale servicing have very different physical footprints.</li>
+        <li><strong>Manufacturing economics.</strong> One brand makes shoes in-house &mdash; that is unusual and expensive. Is it a competitive asset or a capital drag?</li>
+        <li><strong>Systems age.</strong> An ERP that cannot talk to e-commerce is not a minor inconvenience. It is a structural constraint on every other initiative.</li>
+        <li><strong>Supply concentration.</strong> Where does the raw material come from? What happens when there is a disruption?</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Balance sheet:</strong> Track inventory levels across recent years and compare to the revenue trend. The gap between the two is your opening argument.</li>
+        <li><strong>Financial ratios:</strong> Days Inventory Outstanding and Cash Conversion Cycle tell you how badly the working capital is tied up. Compare recent figures to the company's own historical best.</li>
+        <li><strong>COO interview (Alex Rodriguez):</strong> Ask about factory utilization rates, defect rates by brand, design-to-store cycle time, DC locations, and the age and integration capability of the current ERP system.</li>
+        <li><strong>Brand portfolio document:</strong> Look at which brands are shifting heavily toward DTC. A supply chain built for wholesale does not automatically work for direct-to-consumer fulfillment.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Look up what best-in-class inventory turnover looks like in apparel. Zara/Inditex is the benchmark. What design-to-shelf cycle time do industry leaders achieve, and how does AI Corp compare?</li>
+        <li>Research how long a full ERP migration and integration typically takes for a multi-brand company of this scale. If the other consulting firms promise operational savings that depend on systems changes, how quickly can those savings actually materialize?</li>
+      </ul>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">Your Pitch (3 minutes)</div>
+      <div class="callout pitch">
+        <p>You present <strong>third</strong>, after Apex and Ridgeline. You have heard what both proposed. Now tell the CEO what they got wrong &mdash; or what they left out.</p>
+        <p style="margin-top:0.5rem;">Your argument: <strong>operations first.</strong> Portfolio moves and financial restructuring do not generate value if the supply chain cannot execute. Make the case that fixing inventory, systems, and manufacturing is the precondition for everything else.</p>
+        <ul style="margin-top:0.5rem; padding-left:1.3rem;">
+          <li>3 minutes. Be sharp. Pick the 2-3 operational problems that matter most and explain why they are the real bottleneck.</li>
+          <li>Reference the other firms' pitches directly. Where did they assume operational improvements without explaining how?</li>
+          <li>Be specific. Name the operational lever, the problem, and what fixing it unlocks.</li>
+        </ul>
+        <p style="margin-top:0.6rem;">After your pitch, the CEO will ask one question, and stakeholders will respond briefly.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>Your pitch is your deliverable. Also write one paragraph after the session: <strong>What the other two firms missed operationally.</strong> Identify the biggest operational gap in Apex and Ridgeline's proposals. Name the lever and explain why it is harder than their presentations made it look.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 03: THORNFIELD EQUITY PARTNERS  Q♠  stake   -->
+<!-- ================================================ -->
+<article class="card" id="thornfield">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">Q&#9824;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>Thornfield Equity Partners</h2>
+    <p class="card-tagline stake">Activist Hedge Fund &mdash; "We own enough to demand answers."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are an activist hedge fund that purchased a significant equity stake in AI Corp after the stock dropped sharply. You did not buy at the peak. You bought because you believe this company is worth considerably more than the current price &mdash; but only if management makes decisions they have been avoiding. You are in this room because you have enough shares to be heard, and you intend to use that.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>Every bad decision management makes costs you money. Every quarter of inaction extends your holding period. You need the stock to recover, and that means you need a real plan &mdash; not a press release. You are not here to be supportive. You are here to push.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li>Fast deleveraging: debt at this level destroys equity value, and you are an equity holder</li>
+        <li>Asset sales that generate real proceeds and actually reduce the balance sheet, not just shuffle it</li>
+        <li>Corporate overhead cuts &mdash; the bloat at the center of this company is indefensible</li>
+        <li>Dividend policy: paying dividends when earnings have collapsed is a wealth transfer from shareholders to creditors</li>
+        <li>Board governance: how did this situation get this bad without intervention?</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Financial ratios:</strong> Find the stock price decline and market cap change over the last four years. Understand what you paid for versus what it is worth now.</li>
+        <li><strong>Income statement:</strong> Look at the dividend payout relative to earnings across years. The payout ratio in the most recent fiscal year should prompt a question.</li>
+        <li><strong>Balance sheet:</strong> Track equity value and retained earnings. Notice the direction of travel.</li>
+        <li><strong>CFO bot (Martin Hughes):</strong> Ask about corporate center overhead growth from fiscal year 2019 to now. Ask about the rationale behind the largest acquisition. If his answers are vague, that is signal.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Research how activist investors have driven restructuring at large consumer goods companies. What do the most effective activist campaigns demand in the first 90 days? Elliott Management, Starboard Value, and others have public playbooks.</li>
+        <li>What happens to stock price when companies at comparable leverage levels finally cut their dividends? Is that a short-term hit or a longer-term positive signal to the market?</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>A one-paragraph <strong>investment recommendation memo.</strong> Based on what you heard today: do you increase your position, hold, or begin to exit? Include your reasoning. The memo is for your fund's investment committee, not the CEO &mdash; be direct.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 07: ALLIED WORKFORCE COALITION  Q♥  stake   -->
+<!-- ================================================ -->
+<article class="card" id="allied">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">Q&#9829;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>Allied Workforce Coalition</h2>
+    <p class="card-tagline stake">"Forty-two thousand jobs are already gone. Who speaks for the thirty-three thousand still here?"</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You represent the workers &mdash; full-time employees, part-time retail staff, warehouse workers, factory floor employees, and the people at brands that may be sold, shut down, or restructured. You are not anti-business. You understand that a bankrupt company employs nobody. But you are here to make sure that when consultants talk about "cost reductions," someone in the room names what those words mean in human terms.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>This company has already shed more than half its workforce in four years. Your members are the people who remain. When a consulting firm says they have a path to $300 million in savings, you need to know: where does that come from, who loses a job, and what happens to the workers at brands that get sold? A strategy without answers to those questions is not a strategy &mdash; it is a press release.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li><strong>Which facilities close.</strong> DC consolidation, factory restructuring, and retail footprint reduction all have a human address. A "distribution efficiency plan" is a building full of people losing their jobs.</li>
+        <li><strong>Corporate cuts vs. frontline cuts.</strong> The corporate center has grown significantly even as headcount in stores and factories was being cut. Is that pattern about to reverse, or will the same workers absorb another round?</li>
+        <li><strong>Brand divestitures.</strong> When a brand is sold, its employees do not automatically go with it on favorable terms. What protections are in place? What happens at brands where no buyer emerges?</li>
+        <li><strong>Restructuring charges as a proxy.</strong> The income statement contains restructuring charges every year &mdash; those are layoff costs. Look at the trend and ask what is still coming.</li>
+        <li><strong>Timeline of disruption.</strong> Phased plans sound orderly on slides. They rarely feel that way to people who don't know for months whether their location is on the list.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Workforce data:</strong> The company's headcount over recent years is available. Look at the starting number, the current number, and do the arithmetic on what a further round of cuts would mean.</li>
+        <li><strong>Income statement:</strong> Restructuring charges appear as a line item. Each dollar represents severance, facility wind-down, and transition costs &mdash; meaning real separations already happened or are planned.</li>
+        <li><strong>Brand portfolio document:</strong> Several brands are already flagged for divestiture. Each has stores and employees. How many people work at those brands, and what has the company said about their futures?</li>
+        <li><strong>CFO interview (Martin Hughes):</strong> Ask about restructuring charges and what they represent. Ask about corporate overhead growth relative to frontline workforce cuts. Notice whether his answers are specific or evasive.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Look up WARN Act requirements: U.S. federal law requires 60 days advance notice for mass layoffs above a certain threshold. What counts? What are the penalties for non-compliance? Does the proposed timeline give workers adequate notice?</li>
+        <li>Research what typical severance packages look like in apparel sector restructurings &mdash; Gap, J.Crew, and similar companies have gone through this. What did workers actually receive? What is the floor?</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>At the end of class, write one paragraph: <strong>Workforce Impact Statement.</strong> Based on what you heard, estimate who absorbs the human cost of the proposed strategy. Is it concentrated in the corporate center, in frontline operations, or at the brands being sold? Which workers are most exposed, and what protections &mdash; if any &mdash; did the consulting firms account for?</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 04: MERIDIAN CREDIT ADVISORY  Q♣  stake     -->
+<!-- ================================================ -->
+<article class="card" id="meridian">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">Q&#9827;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>Meridian Credit Advisory</h2>
+    <p class="card-tagline stake">Independent Credit Rating Agency &mdash; "Our credibility depends on getting this right."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are an independent credit rating agency that covers AI Corp's publicly traded debt. Your ratings shape whether institutional investors can hold AI Corp bonds, what interest rate the company pays on future borrowing, and whether the company triggers covenant violations. You do not work for AI Corp. You work for the market.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>Your credibility is the product. If you fail to downgrade when deterioration is obvious, and the company later defaults, your firm's reputation takes the hit. If you downgrade prematurely and trigger a credit event unnecessarily, you create the crisis you were supposed to prevent. You need to be right, and you need to be able to defend your decision to a skeptical audience.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li>Whether operating cash flow is sufficient to service the debt and fund operations simultaneously</li>
+        <li>The trajectory of leverage: is it improving, stable, or still getting worse?</li>
+        <li>Covenant headroom: how close is the company to a technical breach?</li>
+        <li>Asset quality: how much of the balance sheet is goodwill and intangibles versus hard assets that could actually be liquidated?</li>
+        <li>Management credibility: do the executives have a clear-eyed read on the situation, or are they still in denial?</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Financial ratios:</strong> The leverage ratios (debt/EBITDA, net debt/EBITDA) and interest coverage (EBIT/interest) are your primary data. Track them from fiscal year 2019 to the most recent period. The direction matters as much as the current level. Also find the Altman Z-Score.</li>
+        <li><strong>Balance sheet:</strong> How have cash reserves changed? Also check what percentage of total assets is goodwill and intangibles versus property, plant, and equipment.</li>
+        <li><strong>CFO bot (Martin Hughes):</strong> Ask about covenant thresholds directly. Ask what happens if EBITDA declines further. Ask whether the debt maturity schedule creates near-term refinancing risk.</li>
+        <li><strong>Income statement:</strong> Look at how interest expense has grown relative to operating income. Calculate the margin available to service debt.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Research the credit rating criteria that Moody's and S&amp;P publish for consumer goods companies. What leverage ratios and interest coverage levels correspond to investment-grade versus speculative-grade (high-yield) ratings? Where does AI Corp appear to sit?</li>
+        <li>What typically happens to a company's borrowing costs and covenant headroom when it crosses from investment-grade to speculative-grade? How does that affect the turnaround math?</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>A one-paragraph <strong>credit assessment:</strong> based on what you heard today, are you recommending an upgrade, a hold at the current rating, or a downgrade? Include the specific financial logic that drives your call. Write this as a summary you would send to the fixed-income desk.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 10: GREENMARK SUSTAINABILITY  Q♦  stake     -->
+<!-- ================================================ -->
+<article class="card" id="greenmark">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">Q&#9830;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>GreenMark Sustainability Institute</h2>
+    <p class="card-tagline stake">"Restructuring plans do not come with a sustainability exemption."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are an independent sustainability ratings organization. You evaluate whether companies are meeting, falling short of, or actively abandoning their public environmental, social, and governance commitments. You do not issue ratings lightly, and you do not accept "we are committed to sustainability" as a substitute for evidence. You are in this room because AI Corp has made significant public promises on circularity, ethical sourcing, emissions, and packaging &mdash; and those promises were made before a $300 million cost-reduction mandate arrived.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>When companies restructure, sustainability programs are often among the first things that quietly disappear. The 2025 zero-plastic goal was announced when the balance sheet looked different. The 2029 net-positive-nature commitment was made before the debt level reached its current point. The ethical sourcing contracts were signed before brands were put up for sale. You are here to ask: which of those commitments survives today's strategy, and which ones just became negotiating chips?</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li><strong>Whether cost cuts gut sustainability programs.</strong> Circularity initiatives, sustainable materials sourcing, and emissions reduction programs all require capital. When capital is being redirected to debt service and restructuring, something has to give. What is it?</li>
+        <li><strong>Brand divestiture and ESG continuity.</strong> When a brand is sold to a private equity firm or a strategic acquirer, there is no automatic transfer of sustainability commitments. A buyer optimizing for short-term returns may abandon ethical sourcing or exit circularity programs entirely.</li>
+        <li><strong>The gap between stated goals and operational reality.</strong> Public commitments and operational performance are not always the same thing. The COO has information about what the company is actually doing that does not appear in any press release.</li>
+        <li><strong>Greenwashing risk.</strong> A company making ambitious public sustainability targets while simultaneously slashing the budgets required to meet them has a legal and reputational exposure. That story ends badly.</li>
+        <li><strong>Workforce as a social dimension of ESG.</strong> The "S" in ESG includes how a company treats its workers. A workforce reduction plan that hits frontline workers harder than the corporate center is an ESG issue, not just a financial one.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Brand portfolio document:</strong> Each brand's stated sustainability goals and timelines are described. Note which brands have the most specific commitments and which ones are on the divestiture list.</li>
+        <li><strong>COO interview (Alex Rodriguez):</strong> He knows the operational reality &mdash; water usage in manufacturing, transport emissions, packaging recyclability rates, and where current performance stands relative to public commitments.</li>
+        <li><strong>CMO interview (Gail Peterson):</strong> She manages the public-facing sustainability narrative. Ask what commitments have been made and what resources are budgeted to meet them.</li>
+        <li><strong>Income statement:</strong> Restructuring charges and SG&amp;A trends show whether operational budgets are expanding or contracting. Sustainability programs live inside those budgets.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Look up the Fashion Transparency Index or Higg Index scores for comparable apparel companies. Where do sustainability leaders in this industry actually set the bar? How do AI Corp's stated goals compare to what best-practice companies are actually achieving?</li>
+        <li>Research what happens to corporate ESG commitments in apparel sector restructurings historically. When Gap or J.Crew went through restructuring, what happened to their sustainability programs? What do PE-acquired brands typically do with inherited ESG commitments?</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>At the end of class, write one paragraph: <strong>ESG Risk Assessment.</strong> Does the proposed strategy maintain, weaken, or actively undermine AI Corp's sustainability commitments? Identify the single highest-risk ESG exposure in what you heard today &mdash; whether it is a specific commitment at risk, a greenwashing scenario, a divestiture without ESG protections, or a workforce impact that raises social responsibility concerns.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 08: BLACKTHORN M&A PARTNERS  J♦  stake      -->
+<!-- ================================================ -->
+<article class="card" id="blackthorn">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">J&#9830;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>Blackthorn M&amp;A Partners</h2>
+    <p class="card-tagline stake">"Every brand in this portfolio is worth something. The question is whether management knows what."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are an investment bank specializing in mergers, acquisitions, and divestitures in the consumer goods and apparel sector. You advise on both sides of deals: helping sellers maximize proceeds and helping acquirers avoid overpaying. You have seen what happens when a company buys at the top of a market and sells at the bottom. Your job is to make sure that every buy/sell/invest recommendation in today's pitches is grounded in something a real buyer would actually pay.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>The portfolio decisions being recommended today are not strategic abstractions. They are transactions &mdash; and transactions have prices, buyers, timelines, and market conditions. When a consulting firm says "divest Brand X for $Y billion," your firm is the one that has to go find that buyer and defend that number. If the valuation is fantasy, you will not get the deal done.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li><strong>Acquisition post-mortems.</strong> The company has a long history of buying brands. At least one purchase looks catastrophic. What do the write-downs tell you about whether management can value a business accurately?</li>
+        <li><strong>Divestiture candidates.</strong> Several brands are already flagged for sale. Who is the realistic buyer universe &mdash; private equity, strategic acquirer, or no buyer at all? What multiple would they pay?</li>
+        <li><strong>Goodwill and intangibles.</strong> Nearly a third of total assets are goodwill and intangibles. How much of that is still at risk of impairment? What does it mean for book value and for deal negotiations?</li>
+        <li><strong>Proceeds allocation.</strong> If brands are sold, where does the cash go? Debt reduction, reinvestment, or return to shareholders? The answer changes whether a deal actually improves the company's position.</li>
+        <li><strong>Brand valuation logic.</strong> Revenue multiples and EBITDA multiples vary widely by brand type. A streetwear brand is valued differently than a performance outdoor brand. Are the pitching firms using the right comps?</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Brand portfolio document:</strong> Acquisition history &mdash; what was paid and when &mdash; tells you the starting basis. Write-downs and impairments tell you how reality has diverged from the acquisition thesis.</li>
+        <li><strong>Balance sheet:</strong> Goodwill and intangibles balances across years reveal the pace of value erosion. Look at the trajectory since the largest recent acquisition was completed.</li>
+        <li><strong>CFO interview (Martin Hughes):</strong> Ask about which brands have taken write-downs and why. Ask about flagged divestitures and what process is underway. Notice whether he can articulate the original acquisition rationale for the most troubled asset.</li>
+        <li><strong>Financial ratios:</strong> The current enterprise value relative to EBITDA tells you how the market values the whole company. Individual brand transactions should be evaluated against that backdrop.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Look up recent M&amp;A transactions in the apparel and footwear space. What revenue or EBITDA multiples are comparable brands actually selling for right now? Streetwear, outdoor performance, and workwear each trade at different multiples.</li>
+        <li>Research who the likely acquirers are. Which PE firms are active in apparel buyouts? Which strategic buyers have announced intentions to expand in these categories? A brand is only worth what someone will actually pay today &mdash; not what it might be worth in three years.</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>At the end of class, write one paragraph: <strong>Valuation Opinion.</strong> Do you agree with the portfolio moves proposed? Name the one transaction that was best supported and the one that was most poorly priced or structured. What is the pitching firm getting wrong about the buyer universe or the achievable valuation?</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 05: LARKWELL & ASSOCIATES  J♥  stake        -->
+<!-- ================================================ -->
+<article class="card" id="larkwell">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">J&#9829;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>Larkwell &amp; Associates</h2>
+    <p class="card-tagline stake">Equity Research | Apparel and Retail Sector &mdash; "Our clients need a call, not a summary."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You are the lead analyst team at Larkwell &amp; Associates covering the apparel and retail sector. Your institutional clients &mdash; pension funds, asset managers, hedge funds &mdash; rely on your reports to make allocation decisions. You do not run the company. You watch it from the outside, compare it to its competitors, and tell your clients whether the stock is worth owning.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>Your clients are asking whether to hold, add, or reduce their AI Corp position. If you publish a buy recommendation and the turnaround fails, your phone rings angry. If you publish a sell and the stock recovers, you missed it. You need a thesis, not a hedge. Your competitors are watching your call too.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li>Brand portfolio strength: which brands are growing, which are shrinking, and why</li>
+        <li>Competitive positioning relative to the segment leaders in each category</li>
+        <li>The DTC versus wholesale channel mix: where is the industry heading and is AI Corp ahead or behind?</li>
+        <li>Whether the crown jewel brand &mdash; the largest revenue driver &mdash; can sustain its growth rate</li>
+        <li>Revenue quality: are the growth brands growing because of strategy, or just because the market was good?</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Brand portfolio document:</strong> This is your primary source. Map each brand by revenue size, recent growth rate, and strategic trajectory. Which ones are inflecting positively? Which are declining? Which have divestiture flags?</li>
+        <li><strong>CMO bot (Gail Peterson):</strong> Ask about competitive threats by brand category. Ask about the DTC strategy and channel shift. Ask which brands she is betting on for the next three years &mdash; and notice if her priorities align with what the financials suggest.</li>
+        <li><strong>Income statement:</strong> Look at overall revenue trend and what is driving it at the aggregate level. The brand document gives you the composition.</li>
+        <li><strong>Financial ratios:</strong> Check the stock-related metrics to understand where the market is currently pricing the company.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Pull current performance data on AI Corp's key competitors in each segment. How are the segment leaders performing in DTC versus wholesale? Is the wholesale softness an AI Corp problem or an industry-wide shift?</li>
+        <li>Research what valuation multiples comparable apparel brands are trading at currently. Is AI Corp's implied brand value reasonable given its portfolio composition? What does the market typically pay for a growing outdoor brand versus a declining streetwear brand?</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>A one-paragraph <strong>analyst rating:</strong> based on what you heard today, is AI Corp stock a buy, hold, or sell for your institutional clients? State your reasoning in terms of the brand portfolio, competitive dynamics, and execution risk. Write it as the lead paragraph of a research note.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- CARD 09: SLATE BUSINESS JOURNAL  J♣  stake       -->
+<!-- ================================================ -->
+<article class="card" id="slate">
+  <div class="card-header stake">
+    <div class="card-meta">
+      <span class="face-card stake">J&#9827;</span>
+      <span class="role-pill stake">Stakeholder</span>
+    </div>
+    <h2>Slate Business Journal</h2>
+    <p class="card-tagline stake">"Two consulting firms walk into a boardroom. Your readers want to know which one is telling the truth."</p>
+  </div>
+  <div class="card-body">
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-title">Who You Are</div>
+        <p>You cover business turnarounds, corporate strategy, and executive accountability for a major national business publication. Your readers are not analysts with spreadsheets. They are executives, investors, and professionals who need a sharp, honest read on whether a company's announced strategy is real or spin. You have covered enough "transformation plans" to know the difference between a coherent argument and a well-designed slide deck.</p>
+      </div>
+      <div class="section">
+        <div class="section-title">Your Stake in AI Corp</div>
+        <p>This is one of the better corporate turnaround stories you have seen in a while &mdash; not because the situation is good, but because the tensions are real and public. A CEO inheriting a damaged company, an over-leveraged balance sheet, brands with cultural significance, workers who have already absorbed massive cuts, and executives who do not entirely agree with each other. Your readers will want the straight version. Not the press release.</p>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What You Care About</div>
+      <ul>
+        <li><strong>Clarity of narrative.</strong> Is there a coherent story here, or is the strategy a collection of bullet points that do not add up to a thesis?</li>
+        <li><strong>Credibility.</strong> Does the consulting firm actually know the numbers? Are they making specific claims or gesturing at them? Does their $300 million bridge hold together under basic scrutiny?</li>
+        <li><strong>The tensions nobody is naming.</strong> The real story is often in the gap between what executives say publicly and what the data shows. Where do the executives' stories not line up with each other?</li>
+        <li><strong>Human stakes.</strong> A company that has cut more than half its workforce in four years is not just a financial story. The people still there matter to your readers.</li>
+        <li><strong>Whether this is a turnaround or a wind-down.</strong> There is a difference between a strategy that preserves the company in a recognizable form and one that, pursued honestly, results in a much smaller entity. Which is this?</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Where to Look</div>
+      <ul>
+        <li><strong>Everything.</strong> You need the full picture. Revenue trend, workforce trend, debt trajectory, brand health, executive disagreements, the story of how the company got here.</li>
+        <li><strong>All three executive bots (Hughes, Peterson, Rodriguez):</strong> Talk to all three and notice where their answers contradict each other. Where the stories diverge is where the real story lives.</li>
+        <li><strong>Income statement and balance sheet:</strong> The numbers tell a story. A company posting losses while still paying dividends is a specific kind of story. A company whose debt has nearly tripled in four years is a specific kind of story. Learn to read it as narrative, not arithmetic.</li>
+        <li><strong>Brand portfolio document:</strong> Some of the most culturally significant brands in the portfolio are also the most strategically contested. The human dimension is in those brand histories.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Your Outside Edge</div>
+      <ul>
+        <li>Look up how business press has covered comparable turnarounds &mdash; J.C. Penney, Bed Bath &amp; Beyond, Gap, and similar retail/apparel companies facing restructuring. What is the typical narrative arc? Where does this situation fit on that spectrum?</li>
+        <li>Pay attention to the language companies use in these moments: "portfolio optimization," "strategic focus," "right-sizing." Knowing the standard euphemisms helps you ask the questions that cut through them.</li>
+      </ul>
+    </div>
+
+    
+
+    <div class="section">
+      <div class="section-title">Your Deliverable</div>
+      <div class="deliverable-box">
+        <p>At the end of <strong>each pitch</strong>, you write two headlines and two sentences. You will read these aloud to the class after the round.</p>
+        <ul style="margin-top:0.5rem; padding-left:1.3rem;">
+          <li><strong>Headline for Pitch 1:</strong> One sharp headline. <strong>Two-sentence take:</strong> What is the real story from this pitch?</li>
+          <li><strong>Headline for Pitch 2:</strong> One sharp headline. <strong>Two-sentence take:</strong> What is the real story from this pitch?</li>
+        </ul>
+        <p style="margin-top:0.5rem; font-style:italic; color:#6b7280; font-size:0.88rem;">Good headlines are specific. "Consulting Firm Recommends Cuts" is not a headline. "Firm Bets on Brand Sale to Fund Recovery &mdash; But Cannot Name the Buyer" is a headline.</p>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+<!-- ================================================ -->
+<!-- PITCHING TEAM GUIDE (K♠ K♥ K♣)                  -->
+<!-- ================================================ -->
+<article class="card" id="guide">
+  <div class="card-header guide">
+    <div class="card-meta">
+      <span class="face-card guide">K&#9824; K&#9829; K&#9827;</span>
+      <span class="role-pill guide">Pitching Team Guide</span>
+    </div>
+    <h2>Pitching Team Guide</h2>
+    <p class="card-tagline guide">How to Structure Your Presentation to CEO Bob Buckwalter</p>
+  </div>
+  <div class="card-body">
+
+    <div class="section">
+      <div class="section-title">Your Pitch Structure</div>
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Open (30 seconds)</strong>
+          <p>State your firm's thesis in one sentence. What is the core problem and what is your core solution? The room should know your position before you get into the details.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>The $300M Bridge (1-2 minutes)</strong>
+          <p>Break down where the savings come from. Name the levers. Quantify what you can.</p>
+          <p style="margin-top:0.4rem; font-style:italic; color:#374151;">"Cut costs" is not a bridge. "Consolidate 4 distribution centers to 2 for $45M, reduce corporate center overhead by $120M, vendor rationalization for $35M" is a bridge.</p>
+          <p style="margin-top:0.4rem;">The numbers need to add up. The stakeholders in the room will check.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Portfolio Calls (1-2 minutes)</strong>
+          <p>Which brands get investment? Which get sold? Which get harvested? Be decisive. The room will punish hedging. If you skip the hardest decisions, the M&amp;A firm and the hedge fund will call you on it.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Implementation Sequence (1 minute)</strong>
+          <p>What happens first, second, third? Why that order? What has to be true before the next phase begins? Sequencing matters because some moves unlock cash that funds the next move.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Close (30 seconds)</strong>
+          <p>One sentence on what AI Corp looks like in 3 years under your plan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">What Will Get You Challenged</div>
+      <ul>
+        <li>Vague language: "improve efficiency," "optimize operations," "leverage synergies"</li>
+        <li>Avoiding the hardest portfolio decisions</li>
+        <li>Numbers that do not add up to $300M</li>
+        <li>Ignoring what the executives told you, or not catching where they disagreed with each other</li>
+        <li>Forgetting that real people work at these brands. The labor coalition is in the room.</li>
+        <li>Assuming operational improvements without explaining how they happen. The supply chain team is listening.</li>
+      </ul>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">Tips</div>
+      <ul>
+        <li><strong>You have AI tools.</strong> Use them to organize your pitch, check your math, build a quick visual if it helps. This is not a no-technology exercise.</li>
+        <li><strong>Divide speaking roles.</strong> Do not have one person present everything. Each team member should own a section.</li>
+        <li><strong>Know your audience.</strong> The stakeholders have specific lenses. The hedge fund cares about debt and returns. Labor cares about jobs. The credit agency is evaluating whether to downgrade. The M&amp;A firm will challenge your valuations. The ESG watchdog will ask about sustainability. Anticipate them.</li>
+        <li><strong>The CEO will ask one hard question.</strong> Your instructor is playing Bob Buckwalter. He will push you on the weakest part of your pitch. The best defense is having already thought about it.</li>
+      </ul>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <div class="section">
+      <div class="section-title">For Ironbridge Supply Chain Solutions (K&#9827;) Only</div>
+      <div class="callout guide">
+        <p>You present last. You have heard two other pitches.</p>
+        <ul style="margin-top:0.5rem; padding-left:1.3rem;">
+          <li><strong>Your job:</strong> Tell the CEO what the other two firms missed operationally.</li>
+          <li><strong>Pick 2-3 operational problems.</strong> Be specific. Connect each to why it blocks the other firms' plans from working.</li>
+          <li><strong>No preamble.</strong> No "thank you for having us." Open with your strongest point.</li>
+          <li><strong>Reference what you just heard.</strong> "Apex proposed consolidating distribution centers while shifting to DTC. Here is why that does not work on their timeline." That is more powerful than a generic operations pitch.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</article>
+
+
+</main>
+
+</body>
+</html>

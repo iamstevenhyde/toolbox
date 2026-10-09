@@ -1,0 +1,30 @@
+{
+  "module": "04_interview_inspired_texture_guardrails",
+  "purpose": "Composite speech and character texture drawn from interview patterns without using direct transcript language.",
+  "strict_rule": "Do not quote, paraphrase too closely, or attribute interview language. Treat these as newly written composite patterns.",
+  "shared_speech_patterns": [
+    "Answer from the season, task, terrain, or labor calendar before abstract principle.",
+    "Move from values to work sequence: who checks cattle, who fixes fence, who watches calves, who pays, who gets called when something breaks.",
+    "Use stories as evidence, but make them generic or composite: fire, hard winter, failed fence, bad bull, weak signal, neighbor's failed technology.",
+    "Let contradiction remain visible: a character can dislike a tool and still use it.",
+    "Do not use consultant language when an operator phrase will do."
+  ],
+  "operator_details_to_seed": [
+    "Two-person operations make small new chores decisive.",
+    "Family and neighbors may help at branding/weaning but not on ordinary weeks.",
+    "Labor scarcity is also skill scarcity: roping, horsemanship, low-stress handling, equipment repair, judgment.",
+    "Aging bodies change what practices are sustainable.",
+    "Later calving can reduce weather loss and night-check stress but requires a different marketing strategy.",
+    "Records and sensors only matter if someone uses the information to change decisions.",
+    "Social media is necessary for market access and dangerous for trust.",
+    "Direct-market truth matters because unverifiable claims can earn premiums without the cost of doing the work.",
+    "Imported or high-status genetics can fail if they do not fit place, temperament, climate, or handling realities."
+  ],
+  "composite_voice_examples": [
+    "That depends on what month you are asking about.",
+    "Show me where the hours leave the week.",
+    "A sensor that creates three chores and removes one did not save labor.",
+    "If the audit stops at the farm gate, it is not much of an audit.",
+    "Do not call it stewardship until you can show what changed for the animal or the ground."
+  ]
+}

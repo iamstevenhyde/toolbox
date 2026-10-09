@@ -8,7 +8,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Toolbox">
 <meta property="og:description" content="A classroom activity from The Toolbox: what it is, how it runs, and the materials to run it yourself.">
-<meta property="og:image" content="../assets/img/toolbox-logo-lockup.png"><!-- set absolute URL at deploy -->
+<meta property="og:image" content="https://iamstevenhyde.github.io/toolbox/assets/img/toolbox-logo-lockup.png">
+<meta property="og:url" content="https://iamstevenhyde.github.io/toolbox/tool.html">
+<link rel="canonical" href="https://iamstevenhyde.github.io/toolbox/tool.html">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +29,8 @@
 .series-strip a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
 .series-strip a:hover{color:var(--text)}
 </style>
-<link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/favicon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
 </head>
 <body class="wall">
 <div class="topstrip"></div>
@@ -57,7 +59,7 @@
   <span>Grounded in reality</span>
 </div></div></footer>
 
-<script src="../assets/data.js"></script>
+<script src="assets/data.js"></script>
 <script>
 const fixu = u => u && u.startsWith("./assets/") ? "." + u : u;
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
@@ -78,7 +80,7 @@ if(!t){
   const siblings = (t.series && B.filter(x=>x.series===t.series && x.id!==t.id)) || [];
   const seriesStrip = (t.series && siblings.length) ? `<div class="series-strip"><span class="series-label">Part of</span>${t.series}: ${siblings.map(s=>`<a href="./tool.html?id=${s.id}">${s.n}</a>`).join(", ")}</div>` : '';
   hang.innerHTML = `<div class="sheet"><div class="hang">
-    <div class="frame"><span class="cover" role="img" aria-label="${t.n} cover" style="display:block;aspect-ratio:3/4;background:url('../assets/img/covers/${t.cover}') center/cover no-repeat"></span></div>
+    <div class="frame"><span class="cover" role="img" aria-label="${t.n} cover" style="display:block;aspect-ratio:3/4;background:url('assets/img/covers/${t.cover}') center/cover no-repeat"></span></div>
     <div>
       <div><span class="dk">${t.k}${t.ai?' · AI-built':''}</span><span class="spec-no">No. ${no} of ${B.length}</span></div>
       <h1>${t.n}</h1>

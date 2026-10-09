@@ -1,0 +1,85 @@
+{
+  "module": "01_wilsey_virtual_fencing_context",
+  "case": "Wilsey Ranch: Virtual Fencing",
+  "case_facts": {
+    "operation": "Wilsey Ranch is a labor-constrained cow-calf and American Wagyu/Akagushi-influenced direct-market operation near Marsing, Idaho.",
+    "people": "Lisa Wilsey and her mother Debby carry the regular workload; family help appears mainly around high-intensity events such as branding and weaning.",
+    "herd": "About 250 mother cows plus 50-60 yearlings.",
+    "business_model": "Direct-to-consumer and cooperative-market orientation with premium meat, tallow products, and local-market/customer-trust demands.",
+    "terrain_and_infrastructure": "Rough or uneven ground, pasture-to-pasture moves, trees/brush/signal concerns, and prior experience with temporary electric fencing that did not fit all cattle behavior.",
+    "identity_tension": "Virtual fencing may preserve the ranch by easing labor and improving grazing control, but it also changes what ranching feels like and what skills are central."
+  },
+  "technology_options_from_case": {
+    "nofence": {
+      "rough_case_estimate": "60-collar starter package about $20,748 in year 1 and about $1,920 per year thereafter.",
+      "likely_use": "Small pilot or staged adoption."
+    },
+    "vence": {
+      "rough_case_estimate": "250 head about $10,000 per year subscription plus base station/setup.",
+      "likely_use": "Whole-herd or larger pilot where infrastructure fits."
+    },
+    "halter": {
+      "rough_case_estimate": "250 head about $15,000 per year subscription plus towers.",
+      "likely_use": "Higher-service virtual fencing and monitoring model, dependent on tower/cell fit."
+    }
+  },
+  "industry_virtual_fencing_evidence": {
+    "typical_cost_points": [
+      "Average 100-head deployment around $20,000.",
+      "Collars often range around $200-329 per head depending on vendor/species.",
+      "Base stations or towers can run $5,000-10,000 each.",
+      "Physical fence can exceed $30,000 per mile in some contexts."
+    ],
+    "labor_outcome_examples": [
+      "Summer gather reported from 7 days at 85% success to 3.5 days at 100% success.",
+      "2,000-acre gather reported from 3-5 days with 3-5 people to 4 hours with 2 people, a 90-95% labor-day reduction.",
+      "Range gather reported from 2-3 weeks to 5 days, a 67-75% reduction.",
+      "One large early-adopter comparison reported gathering time dropping from 3 months to 2.5 weeks.",
+      "One case eliminated weekly perimeter checks across 26 gates."
+    ],
+    "reliability_and_failure_examples": [
+      "One Vence year-2 case had roughly 40% collar failure in a season.",
+      "A repaired/current Vence example reported roughly 98% working collars.",
+      "A Halter example reported 1-3 failures out of 300 collars, about 0.3-1%.",
+      "Signal dead zones can remove large terrain sections from practical use.",
+      "GPS/cell variability can create animal-welfare problems if animals are punished near water or in poor-signal areas."
+    ],
+    "ecological_outcomes_examples": [
+      "Medusa head cover reduction from about 25% to under 10%.",
+      "Forage production increase from about 3,000 lbs/acre to 8,000 lbs/acre.",
+      "Barbed goat grass seed heads reduced from about 16 per plant to 1-2.",
+      "Fuel load reduction from about 4,300 lbs/acre to 800 lbs/acre."
+    ]
+  },
+  "wilsey_specific_economic_texture": {
+    "wagyu_finish_time": "Wagyu-influenced cattle may take about 30 months to finish compared with roughly 18 months or less in conventional systems.",
+    "why_it_matters": [
+      "More months of feed, pasture, monitoring, and health risk.",
+      "More capital tied up per animal.",
+      "Higher value of avoided loss and better grazing distribution.",
+      "Longer exposure to market, drought, and labor shocks."
+    ],
+    "bull_adaptation": "Imported Akagushi/Wagyu bulls may look valuable genetically but can take time to acclimate and may be harder to handle; locally adapted bulls can be cheaper, safer, easier, and better trained.",
+    "dna_testing": "DNA testing around $50 per cow was discontinued when market requirements no longer justified it.",
+    "hay_decision": "Buying hay versus growing hay is a combined cost, labor, equipment, fire-risk, and herd-size decision, not only a feed-price decision."
+  },
+  "pilot_design": {
+    "decision_rule_needed": "A pilot must define what result means stop, continue, or scale.",
+    "test_hard_conditions": [
+      "Broken terrain or signal-challenged pastures.",
+      "Groups likely to test boundaries.",
+      "Pastures where water, brush, or draws complicate GPS/cell performance.",
+      "Bottleneck labor weeks, not only easy months."
+    ],
+    "metrics": [
+      "Training days per group.",
+      "Escapes or boundary failures by severity.",
+      "Human hours before and after, including troubleshooting.",
+      "Collar maintenance and battery/charging work.",
+      "Mapped dead zones.",
+      "Animal stress and health events.",
+      "Grazing distribution/utilization changes.",
+      "Whether Lisa and Debby actually get time back in the hardest weeks."
+    ]
+  }
+}
