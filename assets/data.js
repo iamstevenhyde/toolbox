@@ -265,6 +265,21 @@ window.HT = {
      materials:[
        {l:"Better Off: Open Deals, play the live game",k:"game",u:"https://iamstevenhyde.github.io/better-off/"}
      ]},
+    {id:"parent-trap", n:"The Parent Trap", k:"Simulation", ai:false, cover:"parent-trap.webp",
+     url:"https://iamstevenhyde.github.io/parent-trap/pages/team.html",
+     run:{time:"one class night", level:"MBA", size:"teams of 1 to 3 players", platform:"Web app + instructor admin page", prep:"instructor opens the admin page and creates a game"},
+     g:"corporate diversification, synergy and anergy, complexity cost, and the winner's curse",
+     blurb:"Teams run holding companies, bid for businesses in a sealed-bid market, and try to join up what they own. The question is whether the combined company is worth more than the parts.",
+     purpose:"Diversification is easy to defend in a slide and hard to defend with your own cash. Each team holds a set of businesses, a credit line, and a limited amount of attention, then buys, lists, co-bids, and runs corporate actions round by round. Owning two businesses is not enough to earn a synergy, because the teams have to join them up, and every unrelated business adds complexity cost.",
+     framework:"Related and unrelated diversification, synergy versus anergy, the cost of running many different businesses, and the winner's curse in sealed-bid auctions, where the highest guess tends to be too high.",
+     how:"A live web app. The instructor opens the admin page and creates a game, which shows a four-letter team code. Students open the team page, enter the code, and take a seat as CEO, CFO, Head of Deals, or Head of Operations. A projector page shows the room. To try it without a class, open the admin page with ?local=1 on one laptop: the game runs in that browser with no database, and a Seat all teams (demo) button fills the lobby.",
+     note:"The test-on-one-laptop link keeps everything in the browser it is opened in. A real class session uses the live links.",
+     materials:[
+       {l:"Professor: admin page (create and run a game)",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/admin.html"},
+       {l:"Student: team page (join with a code)",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/team.html"},
+       {l:"Projector view",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/projector.html"},
+       {l:"Test both views on one laptop (no database)",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/admin.html?local=1"}
+     ]},
     {id:"resume-bias", n:"Resume Bias Lab", k:"Exercise", ai:true, cover:"resume-bias.webp",
      run:{level:"MBA", prep:"light"},
      g:"202 real resumes",
