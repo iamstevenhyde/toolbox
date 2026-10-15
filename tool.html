@@ -87,7 +87,7 @@ if(!t){
       <div class="dg">Grounded in ${t.paper?`<a href="./about.html#${t.paper}">${t.g}</a>`:t.g}</div>
       ${srcBlock}
       <div class="actions">
-        ${t.url?`<a class="btn primary" href="${t.url}" target="_blank">Open the ${t.run&&t.run.platform==="Poe"?"bot":"GPT"} ↗</a>`:''}
+        ${t.url?`<a class="btn primary" href="${t.url}" target="_blank">Open the ${t.run&&t.run.platform==="Poe"?"bot":(t.run&&t.run.platform==="Browser"?"game":"GPT")} ↗</a>`:''}
         <a class="btn" href="./index.html">More from the bench</a>
       </div>
     </div>
