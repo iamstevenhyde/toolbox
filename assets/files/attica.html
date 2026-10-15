@@ -69,7 +69,7 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
 
   function save(){ try{ sessionStorage.setItem(STORE, JSON.stringify(S)); }catch(e){} }
   function load(){ try{ return JSON.parse(sessionStorage.getItem(STORE)); }catch(e){ return null; } }
-  function fresh(seat){ return {seat:seat||0, round:1, phase:seat?"intro":"picker", mine:[], theirs:[], pending:null}; }
+  function fresh(seat,one){ return {seat:seat||0, one:!!one, round:1, phase:seat?"intro":"picker", mine:[], theirs:[], pending:null}; }
 
   function word(){ return S.seat===1 ? "partner" : "competitor"; }
   function totals(){
@@ -92,19 +92,34 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
   }
   function scene(){
     var w = word();
-    var who = S.seat===1 ? "your potential partner" : "a competitor";
+    var who = S.seat===1 ? "your potential partner" : "your potential competitor";
     return '<div class="card scene"><p class="mono">Seat '+S.seat+' &middot; private screen</p>'
       + '<p>Welcome to the tech industry. You lead an innovative company that has found a way to revolutionize battery technology. '
       + 'Word just reached you that '+who+' has been developing parallel technology. '
       + 'Launch timing matters, and you must decide your move before the industry conference in 48 hours.</p></div>';
   }
 
-  var OUT = {
-    XX:"A fierce battle erupts. Marketing budgets skyrocket as both companies chase the same share of the market.",
-    CC:"A powerful alliance is born. Your combined expertise opens opportunities neither company had alone.",
-    XC:"A bold power play succeeds. Your aggressive move catches the other company off guard and reshapes the market.",
-    CX:"Your openness leaves you exposed. The other company moves first and takes the market."
+  var OUTS = {
+    1:{XX:"The alliance collapses into a fierce market war. Marketing budgets skyrocket as both companies chase the same share of the market.",
+       CC:"The alliance deepens. Your combined expertise opens opportunities neither company had alone.",
+       XC:"A bold break from the alliance succeeds. Your partner is caught off guard and you reshape the market.",
+       CX:"Your partner betrays you. Your openness leaves you exposed and they take the market."},
+    2:{XX:"The truce collapses into a fierce market war. Marketing budgets skyrocket as both companies chase the same share of the market.",
+       CC:"The truce holds. Sharing the launch opens opportunities neither company had alone.",
+       XC:"A bold power play succeeds. Your rival is caught off guard and you reshape the market.",
+       CX:"Your rival outplays you. Your openness leaves you exposed and they take the market."},
+    n:{XX:"A fierce market war erupts. Marketing budgets skyrocket as both companies chase the same share of the market.",
+       CC:"Both companies share the launch. Your combined expertise opens opportunities neither had alone.",
+       XC:"A bold move succeeds. The other company is caught off guard and you reshape the market.",
+       CX:"Your openness leaves you exposed. The other company moves first and takes the market."}
   };
+  var DESC = {
+    1:{C:"Stay in the alliance and share the launch",X:"Break away and launch alone"},
+    2:{C:"Call a truce with a rival and share the launch",X:"Beat your rival to launch"},
+    n:{C:"Share the launch",X:"Launch alone"}
+  };
+  function desc(k){ return (S.one?DESC.n:DESC[S.seat])[k]; }
+  function outText(key){ return (S.one?OUTS.n:OUTS[S.seat])[key]; }
 
   function render(){
     var h="";
@@ -120,8 +135,8 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
       h = '<p class="mono">Round '+S.round+' of '+ROUNDS+' &middot; private decision</p><h1>Do not show your screen</h1>'
         + scoreBar() + '<h2>Payoffs</h2>' + matrix()
         + '<h2>Your choice</h2><div class="row">'
-        + '<button class="choice" data-act="pick" data-v="C"><b>Cooperate</b><span>Form a strategic alliance for mutual benefit</span></button>'
-        + '<button class="choice" data-act="pick" data-v="X"><b>Compete</b><span>Launch an aggressive market strategy to secure your position</span></button></div>';
+        + '<button class="choice" data-act="pick" data-v="C"><b>Cooperate</b><span>'+esc(desc("C"))+'</span></button>'
+        + '<button class="choice" data-act="pick" data-v="X"><b>Compete</b><span>'+esc(desc("X"))+'</span></button></div>';
     } else if(S.phase==="reveal"){
       h = '<p class="mono">Round '+S.round+' of '+ROUNDS+'</p><h1>Locked in</h1>'
         + '<div class="card"><p class="lock">You chose <b>'+NAME[S.pending]+'</b>. This cannot be changed.</p>'
@@ -134,7 +149,7 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
     } else if(S.phase==="result"){
       var i=S.mine.length-1, key=S.mine[i]+S.theirs[i], p=PTS[key];
       h = '<p class="mono">Round '+S.round+' of '+ROUNDS+' result</p><h1>'+NAME[S.mine[i]]+' vs. '+NAME[S.theirs[i]]+'</h1>'
-        + '<div class="card"><p>'+esc(OUT[key])+'</p><p class="big">You +'+p[0]+' &nbsp; Them +'+p[1]+'</p></div>'
+        + '<div class="card"><p>'+esc(outText(key))+'</p><p class="big">You +'+p[0]+' &nbsp; Them +'+p[1]+'</p></div>'
         + scoreBar()
         + '<p class="small">Check: your totals should be the mirror image of theirs. If they are not, one of you tapped the wrong choice. Fix it now.</p>'
         + '<div class="row"><button class="ghost" data-act="fix">I tapped the wrong choice</button></div><p></p>'
@@ -153,10 +168,21 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
     window.scrollTo(0,0);
   }
 
+  function wordTable(){
+    var rows=[["Counterpart","your potential partner","your potential competitor"],
+      ["Cooperate, described",DESC[1].C,DESC[2].C],["Compete, described",DESC[1].X,DESC[2].X],
+      ["Both cooperate","the alliance deepens","the truce holds"],
+      ["Both compete","the alliance collapses","the truce collapses"],
+      ["You compete, they cooperate","a bold break from the alliance","a bold power play"],
+      ["You cooperate, they compete","your partner betrays you","your rival outplays you"]];
+    var t='<table><tr><th>Where</th><th>Seat 1</th><th>Seat 2</th></tr>';
+    for(var i=0;i<rows.length;i++) t+='<tr><td>'+rows[i][0]+'</td><td>'+esc(rows[i][1])+'</td><td>'+esc(rows[i][2])+'</td></tr>';
+    return t+'</table>';
+  }
   function instructorHTML(){
     var base = location.href.split("#")[0];
     return '<p class="mono">Instructor notes &middot; not for students</p><h1>Attica</h1>'
-      + '<p>A four-minute pairs activity. Each pair plays the same three-round game on two separate devices. The payoffs are identical. One word in the story differs: one player’s counterpart is a <b>partner</b>, the other’s is a <b>competitor</b>.</p>'
+      + '<p>A four-minute pairs activity. Each pair plays the same three-round game on two separate devices. The payoffs, option order and text length are identical. Only a small set of parallel word pairs differs: one seat is framed around a <b>partner</b> and an alliance, the other around a <b>competitor</b> and a rival.</p>'
       + '<h2>Links</h2>'
       + '<p>Give students one of these two links, or have them open the plain link and pick a seat.</p>'
       + '<table><tr><th>Seat 1 (partner)</th><td><code>'+esc(base)+'#1</code></td></tr><tr><th>Seat 2 (competitor)</th><td><code>'+esc(base)+'#2</code></td></tr></table>'
@@ -170,8 +196,8 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
       + '<tr><td>Three rounds (about 40 seconds each)</td><td class="n">2 to 3</td></tr>'
       + '<tr><td>Tally the room: how many Compete choices?</td><td class="n">1</td></tr>'
       + '<tr><td>Reveal the frame, then debrief</td><td class="n">5 to 10</td></tr></table>'
-      + '<h2>Reveal</h2><p>After the tally, have students tap <b>Show me my frame</b> and read the phrase aloud to their pair. Seat 1 reads “your potential partner.” Seat 2 reads “a competitor.”</p>'
-      + '<h2>If it goes wrong</h2><ul class="steps">'
+      + '<h2>Reveal</h2><p>After the tally, have students tap <b>Show me my frame</b> and read the phrase aloud to their pair. They will see their counterpart, their two options and so on described in the other seat’s words.</p>' + wordTable() + ''
+      + '<h2>One-word version</h2><p>For a second run, use the links ending in <code>#1w</code> and <code>#2w</code>. Options and outcomes then use identical wording, and only “partner” versus “competitor” in the opening scene differs. Compare how the room splits across the two versions.</p><h2>If it goes wrong</h2><ul class="steps">'
       + '<li>Totals that do not mirror mean someone tapped the wrong choice. Use <b>I tapped the wrong choice</b>.</li>'
       + '<li>No devices or no signal: use the two printed handouts from the appendix and a pencil. The game is the same.</li></ul>'
       + '<p class="small">This page runs entirely in the browser. It sends nothing anywhere and needs no login. Progress is kept in the tab only.</p>';
@@ -185,11 +211,14 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
     else if(a==="theirs"){ S.mine.push(S.pending); S.theirs.push(v); S.phase="result"; }
     else if(a==="fix"){ S.mine.pop(); S.theirs.pop(); S.phase="enter"; }
     else if(a==="next"){ if(S.round<ROUNDS){ S.round++; S.pending=null; S.phase="choose"; } else { S.phase="final"; } }
-    else if(a==="restart"){ S=fresh(S.seat); }
+    else if(a==="restart"){ S=fresh(S.seat,S.one); }
     else if(a==="showframe"){
       var w=word();
+      var who = S.seat===1 ? "your potential partner" : "your potential competitor";
       document.getElementById("frame-box").innerHTML =
-        '<p>In your story, the other company was described as: '+(S.seat===1?"your potential partner":"a competitor")+'</p><p class="small">Now compare with the person next to you.</p>';
+        '<p>In your story, the other company was <b>'+who+'</b>.</p>'
+        + (S.one ? '' : '<p>Your options were described as <b>Cooperate</b> ('+esc(desc("C"))+') and <b>Compete</b> ('+esc(desc("X"))+').</p>')
+        + '<p class="small">Now compare with the person next to you.</p>';
       return;
     }
     save(); render();
@@ -204,9 +233,10 @@ mark{background:var(--mark);color:inherit;padding:0 .15em;border-radius:3px}
     var h = (location.hash||"").replace("#","").toLowerCase();
     if(h==="instructor"){ S={phase:"instructor",seat:0,round:1,mine:[],theirs:[],pending:null}; render(); return; }
     var saved = load();
-    var want = (h==="1"||h==="2") ? +h : 0;
-    if(saved && saved.phase!=="instructor" && (!want || saved.seat===want)){ S=saved; }
-    else { S=fresh(want); }
+    var m = /^([12])(w?)$/.exec(h);
+    var want = m ? +m[1] : 0, one = !!(m && m[2]);
+    if(saved && saved.phase!=="instructor" && (!want || (saved.seat===want && !!saved.one===one))){ S=saved; }
+    else { S=fresh(want,one); }
     save(); render();
   }
   window.addEventListener("hashchange", boot);
