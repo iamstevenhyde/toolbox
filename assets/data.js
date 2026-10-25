@@ -264,6 +264,16 @@ window.HT = {
      materials:[
        {l:"Better Off: Open Deals, play the live game",k:"game",u:"https://iamstevenhyde.github.io/better-off/"}
      ]},
+    {id:"foreign-threads", n:"Foreign Threads", k:"Simulation", ai:false, cover:"foreign-threads.webp",
+     url:"https://iamstevenhyde.github.io/foreign-threads/",
+     run:{time:"one class night", level:"MBA", size:"teams, with house teams filling empty seats", platform:"Web app + instructor host page + projector", prep:"instructor opens the host page and creates a game"},
+     g:"entering foreign markets: entry mode, local tastes, costs and barriers, and learning from rivals",
+     blurb:"Teams run fashion brands and decide what to design, where to sell it, and how to enter four city markets, then watch the season reveal who the buyers actually wanted.",
+     how:"A live web app on team laptops with a shared projector. The instructor opens the host page and creates a game, students join with a team code, and the clock runs every step after Start.",
+     note:"Built for MBA 546 week 10 (Global and International Strategy). Test it solo from the host page before class.",
+     materials:[
+       {l:"Foreign Threads, play the live game",k:"game",u:"https://iamstevenhyde.github.io/foreign-threads/"}
+     ]},
     {id:"parent-trap", n:"The Parent Trap", k:"Simulation", ai:false, cover:"parent-trap.webp",
      url:"https://iamstevenhyde.github.io/parent-trap/pages/team.html",
      run:{time:"one class night", level:"MBA", size:"teams of 1 to 3 players", platform:"Web app + instructor admin page", prep:"instructor opens the admin page and creates a game"},
