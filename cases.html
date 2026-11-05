@@ -30,6 +30,8 @@
       <a href="./index.html">The Bench</a>
       <a href="./chapters.html">Chapters</a>
       <a href="./cases.html" class="on">Cases</a>
+      <a href="./research.html">Research</a>
+      <a href="./student-work.html">Student Work</a>
       <a href="./about.html">About</a>
       <a href="./submit.html" class="nav-cta">Submit / Request</a>
     </nav>
@@ -54,16 +56,21 @@
 
 <script src="assets/data.js"></script>
 <script>
-document.getElementById("cases").innerHTML = window.HT.cases.map(c=>`
-  <article class="case">
+const HTc = window.HT;
+const dest = c => { const b=(HTc.bench||[]).find(x=>x.n===c.n||c.n.indexOf(x.n+" (")===0); return b ? "./tool.html?id="+b.id : (c.url||""); };
+document.getElementById("cases").innerHTML = HTc.cases.map(c=>{
+  const d = dest(c);
+  const inner = `
     <div class="cvframe"><span class="cv" role="img" aria-label="${c.n} cover" style="display:block;background-image:url('assets/img/covers/${c.cover}')"></span></div>
     <div>
       <div class="nm">${c.n}</div>
       <div class="cite">${c.cite}</div>
       <div class="desc">${c.desc}</div>
+      ${d?'<div class="go">Open the case page →</div>':''}
     </div>
-    <span class="stamp ${c.status}">${c.badge}</span>
-  </article>`).join("");
+    <span class="stamp ${c.status}">${c.badge}</span>`;
+  return d ? `<a class="case linked" href="${d}">${inner}</a>` : `<article class="case">${inner}</article>`;
+}).join("");
 </script>
 <script src="./assets/cmdk.js"></script>
 </body>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Toolbox · Research</title>
+<meta name="description" content="The research behind the toolbox: machine-learning measures of executives, CEO deception, and how AI is remaking work and the classroom.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Toolbox · Research">
+<meta property="og:description" content="Machine-learning measures of executives, CEO deception, and how AI is remaking work and the classroom.">
+<meta property="og:image" content="https://iamstevenhyde.github.io/toolbox/assets/img/toolbox-logo-lockup.png">
+<meta property="og:url" content="https://iamstevenhyde.github.io/toolbox/research.html">
+<link rel="canonical" href="https://iamstevenhyde.github.io/toolbox/research.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="./assets/hyde-tokens.css">
+<link rel="stylesheet" href="./assets/style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png">
+</head>
+<body class="wall">
+<div class="topstrip"></div>
+<header class="site"><div class="sheet">
+  <div class="topbar">
+    <a class="brand" href="./index.html"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><mask id="tbm"><path d="M36,26 A14,14 0 0 1 64,26 Z" fill="#fff"/><circle cx="50" cy="26" r="7" fill="#000"/><rect x="12" y="26" width="76" height="62" rx="9" fill="#fff"/><rect x="12" y="46" width="76" height="3.5" fill="#000"/><rect x="12" y="67" width="76" height="3.5" fill="#000"/><circle cx="50" cy="56.5" r="4.2" fill="#000"/><circle cx="50" cy="77.5" r="4.2" fill="#000"/></mask><g id="tbmark"><rect width="100" height="100" mask="url(#tbm)" fill="currentColor"/></g></svg><span class="wm">The Toolbox</span></a>
+    <nav class="nav">
+      <a href="./index.html">The Bench</a>
+      <a href="./chapters.html">Chapters</a>
+      <a href="./cases.html">Cases</a>
+      <a href="./research.html" class="on">Research</a>
+      <a href="./student-work.html">Student Work</a>
+      <a href="./about.html">About</a>
+      <a href="./submit.html" class="nav-cta">Submit / Request</a>
+    </nav>
+    <span class="srch" role="button" tabindex="0" aria-label="open search">search <kbd>⌘K</kbd></span>
+    <button class="burger" aria-label="menu" aria-expanded="false">☰</button>
+  </div>
+</div></header>
+
+<section class="lead-band"><div class="sheet">
+  <div class="kicker">Research</div>
+  <h1>Executives, deception, and the machines now <i>sharing the judgment.</i></h1>
+  <p>Three streams: theory-driven machine-learning measures of executives, executive deception and its consequences, and how AI is remaking work and the classroom.</p>
+</div></section>
+
+<div class="paperzone"><main class="sheet"><div class="pubs" id="pubs"></div></main></div>
+
+<footer class="site"><div class="sheet"><div class="row">
+  <span><svg class="mark sm" viewBox="0 0 100 100" aria-hidden="true"><use href="#tbmark"/></svg>Steven J. Hyde · Associate Professor of Management · Boise State</span>
+  
+  <span>The research behind the toolbox</span>
+</div></div></footer>
+
+<script src="assets/data.js"></script>
+<script>
+const bench = window.HT.bench||[];
+document.getElementById("pubs").innerHTML = window.HT.research.filter(p=>!p.rev).map(p=>{
+  const card = bench.find(b=>b.paper===p.id);
+  return `
+  <article class="pub" id="${p.id||''}">
+    <div class="yr">${p.yr}</div>
+    <div>
+      <div class="ti">${p.ti}</div>
+      <div class="au">${p.au}</div>
+      <div class="ar">${p.ar}</div>
+      ${p.media&&p.media.length||card?`<div class="media">${(p.media||[]).map(m=>`<span class="${p.award?'award':''}">${m}</span>`).join("")}${card?`<a class="plink" href="./tool.html?id=${card.id}">on the bench →</a>`:''}</div>`:''}
+    </div>
+    <div class="ven">${p.ven}</div>
+  </article>`;}).join("");
+if(location.hash){ const el=document.getElementById(location.hash.slice(1)); if(el) el.scrollIntoView({block:"center"}); }
+</script>
+<script src="./assets/cmdk.js"></script>
+</body>
+</html>
