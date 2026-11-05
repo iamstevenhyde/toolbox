@@ -517,3 +517,42 @@ footer.site a{color:var(--text);border-bottom:1px solid var(--teal)}
 .nav .nav-cta.on{color:var(--on-action);border-color:var(--text)}
 @media(max-width:980px){.nav.open .nav-cta{justify-content:center;margin-left:0}}
 .pathlinks{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+
+/* 2026-11-04 design audit fixes */
+h2.dsub{font-family:var(--sans);line-height:1.2}
+.filtog{display:none}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding-left:10px;padding-right:10px}
+.btn.ghost:hover{color:var(--text);border-color:transparent}
+.hang{align-items:start}
+.hang .actions{margin-top:24px}
+@media(max-width:980px){.hang{gap:24px;padding:24px 0 36px}.hang .frame{max-width:240px}}
+@media(max-width:600px){
+  /* header: one row, icon-only search chip */
+  .topbar{gap:8px}
+  .brand{flex:0 1 auto;min-width:0;white-space:nowrap;gap:10px}
+  .brand .wm{font-size:22px;white-space:nowrap}
+  .srch{width:44px;height:44px;min-height:44px;padding:0;justify-content:center;font-size:0;gap:0;flex:none;position:relative}
+  .srch kbd{display:none}
+  .srch::before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5L21 21'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5L21 21'/%3E%3C/svg%3E") center/contain no-repeat}
+  .burger{margin-left:0;flex:none}
+  /* bench: one scrolling chip row, dropdowns behind Filters, two-up cards */
+  .chiprow{display:flex;gap:8px;align-items:center}
+  .filtog{display:inline-flex;align-items:center;flex:none;font-family:var(--sans);font-size:17px;min-height:48px;padding:8px 16px;color:var(--text);background:transparent;border:2px solid var(--text);border-radius:4px;font-weight:700;cursor:pointer}
+  .filtog[aria-expanded="true"]{background:var(--text);color:var(--bg)}
+  .chiprow .chips{flex:1;min-width:0;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0}
+  .chiprow .chips::-webkit-scrollbar{display:none}
+  .chiprow .chips button{flex:none;white-space:nowrap}
+  .chips2{display:none;margin-top:8px}
+  .chips2.open{display:block}
+  .ctime{margin-bottom:8px}
+  .count{padding-top:10px}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:16px 0 48px}
+  .placard{padding:10px 10px 6px}
+  .placard .no{font-size:13px}
+  .placard .ct{font-size:16px;margin:2px 0 4px}
+  .placard .cg{font-size:14px;line-height:1.35;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .tags{top:6px;left:6px;right:6px}
+  .tags .k,.tags .ai{font-size:12px;padding:2px 6px}
+  .pmeta{padding:8px 10px 10px;font-size:13px;gap:2px 8px}
+  .pmeta a.kit{font-size:13px;min-height:44px}
+}

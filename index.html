@@ -42,7 +42,10 @@
 </div></header>
 
 <section class="shelf" id="bench"><div class="sheet">
-  <div class="chips" id="chips" role="group" aria-label="Kind of tool"></div>
+  <div class="chiprow">
+    <button type="button" class="filtog" id="filtog" aria-expanded="false" aria-controls="chips2">Filters</button>
+    <div class="chips" id="chips" role="group" aria-label="Kind of tool"></div>
+  </div>
   <div class="chips chips2" id="chips2"></div>
   <div class="count" id="count"></div>
 </div></section>
@@ -116,7 +119,7 @@ function render(){
       <a class="pl" href="./tool.html?id=${x.id}">
         <div class="frame">
           <span class="cover" role="img" aria-label="${x.n} cover" style="background-image:url('assets/img/covers/${x.cover}')"></span>
-          <span class="tags"><span class="k">${x.k}</span>${x.ai?'<span class="ai">AI</span>':''}</span>
+          <span class="tags"><span class="k">${x.k}</span></span>
         </div>
         <span class="placard">
           <span class="no">No. ${no}${x.lit?' · From the literature':''}</span>
@@ -133,6 +136,7 @@ function bind(box, attr, set){
     set(b.dataset[attr]); [...box.querySelectorAll("button[data-"+attr+"]")].forEach(c=>c.setAttribute("aria-pressed", String(c===b))); render(); });
 }
 bind(chips, "k", v=>active=v);
+document.getElementById("filtog").addEventListener("click", e=>{ const o=chips2.classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", String(o)); });
 document.getElementById("plat").addEventListener("change", e=>{ plat=e.target.value; render(); });
 document.getElementById("ctime").addEventListener("change", e=>{ ctime=e.target.value; render(); });
 render();

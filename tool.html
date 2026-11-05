@@ -79,6 +79,11 @@ if(!t){
   const srcBlock = t.lit ? `<div class="src-block"><span class="src-label">Published activity</span><span class="src-cite">${t.citation||''}</span>${t.doi?`<a class="src-doi" href="${t.doi}" target="_blank">${t.doi}</a>`:''}</div>` : '';
   const siblings = (t.series && B.filter(x=>x.series===t.series && x.id!==t.id)) || [];
   const seriesStrip = (t.series && siblings.length) ? `<div class="series-strip"><span class="series-label">Part of</span>${t.series}: ${siblings.map(s=>`<a href="./tool.html?id=${s.id}">${s.n}</a>`).join(", ")}</div>` : '';
+  const firstMat = (t.materials||[]).find(m=>m.u);
+  const primary = t.url ? `<a class="btn primary" href="${t.url}" target="_blank">Open the ${t.run&&t.run.platform==="Poe"?"bot":(t.run&&t.run.platform==="Browser"?"game":"GPT")} ↗</a>`
+    : t.prompt ? `<button type="button" class="btn primary" id="copytop">Copy the prompt</button>`
+    : firstMat ? `<a class="btn primary" href="${fixu(firstMat.u)}" target="_blank">${firstMat.l} ↗</a>`
+    : `<a class="btn primary" href="#kit">Read the teaching kit</a>`;
   hang.innerHTML = `<div class="sheet"><div class="hang">
     <div class="frame"><span class="cover" role="img" aria-label="${t.n} cover" style="display:block;aspect-ratio:3/4;background:url('assets/img/covers/${t.cover}') center/cover no-repeat"></span></div>
     <div>
@@ -87,8 +92,8 @@ if(!t){
       <div class="dg">Grounded in ${t.paper?`<a href="./about.html#${t.paper}">${t.g}</a>`:t.g}</div>
       ${srcBlock}
       <div class="actions">
-        ${t.url?`<a class="btn primary" href="${t.url}" target="_blank">Open the ${t.run&&t.run.platform==="Poe"?"bot":(t.run&&t.run.platform==="Browser"?"game":"GPT")} ↗</a>`:''}
-        <a class="btn" href="./index.html">More from the bench</a>
+        ${primary}
+        <a class="btn ghost" href="./index.html">More from the bench</a>
       </div>
     </div>
   </div></div>`;
@@ -96,26 +101,27 @@ if(!t){
     <div>
       ${seriesStrip}
       <p class="dblurb">${t.blurb}</p>
-      ${t.purpose?`<div class="dsub">Why this exists</div><p class="dhow">${t.purpose}</p>`:''}
-      ${t.run?`<div class="dsub">Field notes</div><div class="specs">${[["time","Time"],["level","Level"],["size","Format"],["platform","Platform"],["prep","Prep"]].filter(p=>t.run[p[0]]).map(p=>`<div class="spec"><span class="sl">${p[1]}</span><span class="sv">${t.run[p[0]]}</span></div>`).join("")}</div>`:''}
-      ${t.framework?`<div class="dsub">The framework</div><p class="dhow">${t.framework}</p>`:''}
-      ${t.how?`<div class="dsub">How it runs</div><p class="dhow">${t.how}</p>`:''}
-      ${t.steps&&t.steps.length?`<div class="dsub">Run of show</div><ol class="steps">${t.steps.map(s=>`<li><span>${s}</span></li>`).join("")}</ol>`:''}
-      ${t.prompt?`<div class="dsub">The prompt. Copy it, run it, remix it</div><div class="promptbox"><button class="copybtn" id="copybtn">copy</button><pre id="prompttext">${esc(t.prompt)}</pre></div>`:''}
-      ${t.debrief&&t.debrief.length?`<div class="dsub">Debrief questions</div><ul class="debrief">${t.debrief.map(q=>`<li>${q}</li>`).join("")}</ul>`:''}
-      ${t.materials&&t.materials.length?`<div class="dsub">Materials</div><ul class="mats">${t.materials.map(m=>`<li><span class="mk">${m.k}</span>${m.u?`<a href="${fixu(m.u)}" target="_blank">${m.l} ↗</a>`:m.l}</li>`).join("")}</ul>`:''}
+      ${t.purpose?`<h2 class="dsub">Why this exists</h2><p class="dhow">${t.purpose}</p>`:''}
+      ${t.run?`<h2 class="dsub">Field notes</h2><div class="specs">${[["time","Time"],["level","Level"],["size","Format"],["platform","Platform"],["prep","Prep"]].filter(p=>t.run[p[0]]).map(p=>`<div class="spec"><span class="sl">${p[1]}</span><span class="sv">${t.run[p[0]]}</span></div>`).join("")}</div>`:''}
+      ${t.framework?`<h2 class="dsub">The framework</h2><p class="dhow">${t.framework}</p>`:''}
+      ${t.how?`<h2 class="dsub">How it runs</h2><p class="dhow">${t.how}</p>`:''}
+      ${t.steps&&t.steps.length?`<h2 class="dsub">Run of show</h2><ol class="steps">${t.steps.map(s=>`<li><span>${s}</span></li>`).join("")}</ol>`:''}
+      ${t.prompt?`<h2 class="dsub">The prompt. Copy it, run it, remix it</h2><div class="promptbox"><button class="copybtn" id="copybtn">copy</button><pre id="prompttext">${esc(t.prompt)}</pre></div>`:''}
+      ${t.debrief&&t.debrief.length?`<h2 class="dsub">Debrief questions</h2><ul class="debrief">${t.debrief.map(q=>`<li>${q}</li>`).join("")}</ul>`:''}
+      ${t.materials&&t.materials.length?`<h2 class="dsub">Materials</h2><ul class="mats">${t.materials.map(m=>`<li><span class="mk">${m.k}</span>${m.u?`<a href="${fixu(m.u)}" target="_blank">${m.l} ↗</a>`:m.l}</li>`).join("")}</ul>`:''}
     </div>
     <div class="sidecol">
-      ${t.note?`<div class="dsub" style="margin-top:0">Teaching note</div><div class="note">${t.note}</div>`:''}
+      ${t.note?`<h2 class="dsub" style="margin-top:0">Teaching note</h2><div class="note">${t.note}</div>`:''}
     </div>
   </div></div></div></div>`;
   const cb = document.getElementById("copybtn");
-  if(cb) cb.addEventListener("click", ()=>{
+  const ct = document.getElementById("copytop");
+  [cb,ct].filter(Boolean).forEach(cb=>{ const lab=cb.textContent; cb.addEventListener("click", ()=>{
     const txt = document.getElementById("prompttext").textContent;
-    const done = ()=>{ cb.textContent="copied"; setTimeout(()=>cb.textContent="copy",1600); };
+    const done = ()=>{ cb.textContent="copied"; setTimeout(()=>cb.textContent=lab,1600); };
     if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(()=>fallback()); } else fallback();
     function fallback(){ const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); done(); }
-  });
+  }); });
 }
 </script>
 <script src="./assets/cmdk.js"></script>
