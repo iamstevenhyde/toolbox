@@ -289,6 +289,17 @@ window.HT = {
        {l:"Projector view",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/projector.html"},
        {l:"Test both views on one laptop (no database)",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/admin.html?local=1"}
      ]},
+    {id:"principals", n:"Principals", k:"Simulation", ai:false,
+     url:"https://iamstevenhyde.github.io/principals",
+     run:{time:"one class night", level:"MBA", size:"6 boards of up to 8 students", platform:"Phones + instructor host page + projector", prep:"instructor opens the host page and creates a game"},
+     g:"corporate governance: board roles, conflicting incentives, and who the board answers to",
+     blurb:"A board-governance game for MBA classes. Each student sits on a company board with a private role card, the board debates and votes on one real-world-inspired crisis, then sees the morning-after headline and the real case.",
+     how:"Played on phones, with a host view and a projector view. The instructor opens the host page and creates a game, students join with a code and are seated on one of up to six boards, each board talks the crisis through aloud and votes, and the projector then shows the morning-after headline and the real case behind it.",
+     note:"Built for MBA 546 week 12 (corporate governance). Players use the main link; the instructor runs the game from the host view.",
+     materials:[
+       {l:"Principals, play the live game (players)",k:"game",u:"https://iamstevenhyde.github.io/principals"},
+       {l:"Host view (instructor creates and runs a game)",k:"game",u:"https://iamstevenhyde.github.io/principals/admin.html"}
+     ]},
     {id:"resume-bias", n:"Resume Bias Lab", k:"Exercise", ai:true, cover:"resume-bias.webp",
      run:{level:"MBA", prep:"light"},
      g:"202 real resumes",
