@@ -289,7 +289,7 @@ window.HT = {
        {l:"Projector view",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/projector.html"},
        {l:"Test both views on one laptop (no database)",k:"game",u:"https://iamstevenhyde.github.io/parent-trap/pages/admin.html?local=1"}
      ]},
-    {id:"principals", n:"Principals", k:"Simulation", ai:false,
+    {id:"principals", n:"Principals", cover:"principals.webp", k:"Simulation", ai:false,
      url:"https://iamstevenhyde.github.io/principals",
      run:{time:"one class night", level:"MBA", size:"6 boards of up to 8 students", platform:"Phones + instructor host page + projector", prep:"instructor opens the host page and creates a game"},
      g:"corporate governance: board roles, conflicting incentives, and who the board answers to",
